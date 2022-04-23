@@ -12,7 +12,7 @@ struct TabbarView: View {
     var body: some View {
         TabView {
             NavigationView {
-                DailyHomeView()
+                DailyHomeView(dailyImage: UIImage())
             }
             .tag(0)
             .tabItem {
