@@ -37,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		951F132F28149343004F46BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95DBF84C281488CE00662815 /* flicsy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flicsy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95DBF84F281488CE00662815 /* flicsyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flicsyApp.swift; sourceTree = "<group>"; };
 		95DBF851281488CE00662815 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		95DBF84E281488CE00662815 /* flicsy */ = {
 			isa = PBXGroup;
 			children = (
+				951F132F28149343004F46BB /* Info.plist */,
 				95DBF84F281488CE00662815 /* flicsyApp.swift */,
 				95DBF851281488CE00662815 /* ContentView.swift */,
 				95DBF87B2814895300662815 /* DailyHomeView.swift */,
@@ -434,6 +436,8 @@
 				DEVELOPMENT_TEAM = J69VMXBK6A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = flicsy/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access your camera roll.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -463,6 +467,8 @@
 				DEVELOPMENT_TEAM = J69VMXBK6A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = flicsy/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access your camera roll.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -6,13 +6,18 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct DailyHomeView: View {
     var body: some View {
         VStack(spacing: 30){
             Text("This is where the daily photo will pop up!")
             Button {
-                print("testing")
+                if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
+                    PHPhotoLibrary.requestAuthorization({(status: PHAuthorizationStatus) -> Void in ()
+                    })
+                }
+                
             } label : {
                 Text("Reveal Your Daily Photo")
             }
