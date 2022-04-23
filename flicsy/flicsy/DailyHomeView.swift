@@ -9,7 +9,14 @@ import SwiftUI
 
 struct DailyHomeView: View {
     var body: some View {
-        Text("This is where the daily photo will pop up!")
+        VStack(spacing: 30){
+            Text("This is where the daily photo will pop up!")
+            Button {
+                print("testing")
+            } label : {
+                Text("Reveal Your Daily Photo")
+            }
+        }
     }
 }
 
