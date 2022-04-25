@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		951F133228159AB4004F46BB /* ReflectionWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951F133128159AB4004F46BB /* ReflectionWritingView.swift */; };
 		95DBF850281488CE00662815 /* flicsyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF84F281488CE00662815 /* flicsyApp.swift */; };
 		95DBF852281488CE00662815 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF851281488CE00662815 /* ContentView.swift */; };
 		95DBF854281488D000662815 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95DBF853281488D000662815 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		951F132F28149343004F46BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		951F133128159AB4004F46BB /* ReflectionWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionWritingView.swift; sourceTree = "<group>"; };
 		95DBF84C281488CE00662815 /* flicsy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flicsy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95DBF84F281488CE00662815 /* flicsyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flicsyApp.swift; sourceTree = "<group>"; };
 		95DBF851281488CE00662815 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				95DBF851281488CE00662815 /* ContentView.swift */,
 				95DBF87B2814895300662815 /* DailyHomeView.swift */,
 				95DBF87D281489B000662815 /* HistoryView.swift */,
+				951F133128159AB4004F46BB /* ReflectionWritingView.swift */,
 				95DBF8792814891100662815 /* TabBarView.swift */,
 				95DBF853281488D000662815 /* Assets.xcassets */,
 				95DBF855281488D000662815 /* Preview Content */,
@@ -270,6 +273,7 @@
 			files = (
 				95DBF852281488CE00662815 /* ContentView.swift in Sources */,
 				95DBF87C2814895300662815 /* DailyHomeView.swift in Sources */,
+				951F133228159AB4004F46BB /* ReflectionWritingView.swift in Sources */,
 				95DBF87E281489B000662815 /* HistoryView.swift in Sources */,
 				95DBF87A2814891100662815 /* TabBarView.swift in Sources */,
 				95DBF850281488CE00662815 /* flicsyApp.swift in Sources */,

@@ -12,6 +12,7 @@ struct ContentView: View {
         VStack{
             TabbarView()
                 .padding(.bottom, 5)
+                
         }
     }
 }
