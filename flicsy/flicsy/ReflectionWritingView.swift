@@ -6,10 +6,19 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ReflectionWritingView: View {
+    @State private var reflection: String = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Reflection Page")
+        VStack {
+                TextField(
+                    "Write Reflection",
+                    text: $reflection
+                )
+            }
+            .textFieldStyle(.roundedBorder)
     }
 }
 

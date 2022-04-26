@@ -11,6 +11,7 @@ import PhotosUI
 struct DailyHomeView: View {
     @State var dailyImage:UIImage
     @State var displayImage: Bool = false
+    @State var goToReflectionWritingView: Bool = false
     @State var photoDateData : Date = Date()
     @State var photoLocationData : CLLocation = CLLocation()
     @State var photoLocality : String = "" //city
@@ -18,6 +19,10 @@ struct DailyHomeView: View {
     @State var photoCountry : String = ""
     
     let ceo: CLGeocoder = CLGeocoder()
+    
+    func reflectionPage() {
+        goToReflectionWritingView = true
+    }
     
     var body: some View {
         VStack{
@@ -101,6 +106,19 @@ struct DailyHomeView: View {
 //                            )
 //                            .aspectRatio(contentMode: .fit)
                             .scaledToFill()
+                    }
+                }
+                
+                HStack {
+                    Button("Write your Reflection", action: reflectionPage)
+                }
+                .buttonStyle(.bordered)
+                if(goToReflectionWritingView) {
+                    NavigationView {
+                        VStack {
+                            ReflectionWritingView()
+                            Spacer()
+                        }
                     }
                 }
             }
