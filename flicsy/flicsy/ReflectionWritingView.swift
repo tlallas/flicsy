@@ -6,11 +6,23 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ReflectionWritingView: View {
+    @State private var reflection: String = ""
     var body: some View {
-        NavigationView {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Reflection for April 26, 2020")
+        VStack {
+                TextField(
+                    "Write Reflection",
+                    text: $reflection
+                )
+        }
+        .textFieldStyle(.roundedBorder)
+        NavigationLink(destination: CountDown()) {
+            Text("Submit")
+                .padding()
+                .background(Color.white)
         }
     }
 }
