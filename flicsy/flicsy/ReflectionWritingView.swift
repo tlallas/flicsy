@@ -10,6 +10,8 @@ import UIKit
 
 struct ReflectionWritingView: View {
     @State private var reflection: String = ""
+    @Binding var dailyImage: UIImage
+    
     var body: some View {
         Text("Reflection for April 26, 2020")
         VStack {
@@ -19,7 +21,7 @@ struct ReflectionWritingView: View {
                 )
         }
         .textFieldStyle(.roundedBorder)
-        NavigationLink(destination: CountDown()) {
+        NavigationLink(destination: CountDown(dailyImage: $dailyImage)) {
             Text("Submit")
                 .padding()
                 .background(Color.white)
@@ -27,8 +29,8 @@ struct ReflectionWritingView: View {
     }
 }
 
-struct ReflectionWritingView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReflectionWritingView()
-    }
-}
+//struct ReflectionWritingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ReflectionWritingView()
+//    }
+//}

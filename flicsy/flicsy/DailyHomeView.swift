@@ -109,7 +109,7 @@ struct DailyHomeView: View {
                                 .scaledToFill()
                         }
                         VStack {
-                            NavigationLink(destination: ReflectionWritingView()) {
+                            NavigationLink(destination: ReflectionWritingView(dailyImage: $dailyImage)) {
                                 Text("Write Reflection")
                                     .padding()
                                     .background(Color.white)

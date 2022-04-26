@@ -11,11 +11,22 @@ import UIKit
 
 struct CountDown: View {
     @State var timeRemaining = 24*60*60
+    @Binding var dailyImage: UIImage
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        Text("Next Reveal in...")
+        VStack {
+            HStack{
+                Text("Daily photo reflection complete!")
+                    .font(.title2)
+                    .padding(.leading)
+                Spacer()
+            }
+        Image(uiImage: dailyImage)
+            .resizable()
+            .scaledToFit()
+        Text("Next Random Reveal in...")
         Text("\(timeString(time: timeRemaining))")
                     .font(.system(size: 60))
                     .frame(height: 80.0)
@@ -28,6 +39,7 @@ struct CountDown: View {
                             self.timer.upstream.connect().cancel()
                         }
                     }
+        }.navigationBarHidden(true)
     }
     
     //Convert the time into 24hr (24:00:00) format
@@ -39,8 +51,8 @@ struct CountDown: View {
     }
 }
 
-struct CountDown_Previews: PreviewProvider {
-    static var previews: some View {
-        CountDown()
-    }
-}
+//struct CountDown_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CountDown()
+//    }
+//}
