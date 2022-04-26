@@ -11,14 +11,19 @@ import UIKit
 struct ReflectionWritingView: View {
     @State private var reflection: String = ""
     var body: some View {
-        Text("Reflection Page")
+        Text("Reflection for April 26, 2020")
         VStack {
                 TextField(
                     "Write Reflection",
                     text: $reflection
                 )
-            }
-            .textFieldStyle(.roundedBorder)
+        }
+        .textFieldStyle(.roundedBorder)
+        NavigationLink(destination: CountDown()) {
+            Text("Submit")
+                .padding()
+                .background(Color.white)
+        }
     }
 }
 
