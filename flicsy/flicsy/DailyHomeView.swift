@@ -52,16 +52,13 @@ struct DailyHomeView: View {
                                     if (error != nil) {
                                         print("Error retrieving location.")
                                     }
-
                                     let pm = placemarks! as [CLPlacemark]
                                     if pm.count > 0 { //found place
                                         let place = placemarks![0]
                                         photoLocality = place.locality ?? ""
                                         photoAdministrativeArea = place.administrativeArea ?? ""
                                         photoCountry = place.country ?? ""
-                                        print(photoCountry)
                                     }
-
                                 })
                             })
                         }
@@ -98,27 +95,16 @@ struct DailyHomeView: View {
                     ZStack {
                         Image(uiImage: dailyImage)
                             .resizable()
+//                            .frame(
+//                               width:UIScreen.main.bounds.width,
+//                               height:UIScreen.main.bounds.height - 170
+//                            )
+//                            .aspectRatio(contentMode: .fit)
                             .scaledToFill()
-                        VStack(alignment: .trailing) {
-                            Spacer()
-                            HStack(){
-                                Spacer()
-                                Button {
-
-                                } label: {
-                                    Text("Write Reflection")
-                                        .padding()
-                                        .background(Color.white)
-                                        .cornerRadius(10)
-
-                                }.padding(.bottom, 20)
-                            }
-                        }
                     }
-
                 }
-                Spacer()
             }
+            Spacer(minLength: 80)
         }
     }
 }

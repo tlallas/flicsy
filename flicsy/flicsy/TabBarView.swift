@@ -12,7 +12,10 @@ struct TabbarView: View {
     var body: some View {
         TabView {
             NavigationView {
-                DailyHomeView(dailyImage: UIImage())
+                VStack{
+                    DailyHomeView(dailyImage: UIImage())
+                    Spacer()
+                }
             }
             .tag(0)
             .tabItem {
@@ -22,7 +25,10 @@ struct TabbarView: View {
             }
             
             NavigationView {
-                HistoryView()
+                VStack {
+                    HistoryView()
+                    Spacer()
+                }
             }
             .tag(1)
             .tabItem {

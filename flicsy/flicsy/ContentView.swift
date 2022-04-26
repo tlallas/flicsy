@@ -9,10 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack{
+        VStack(){
             TabbarView()
-                .padding(.bottom, 5)
-                
+                .padding(.bottom, 5)    
         }
     }
 }
