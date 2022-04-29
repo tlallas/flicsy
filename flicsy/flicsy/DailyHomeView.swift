@@ -10,6 +10,7 @@ import PhotosUI
 
 struct DailyHomeView: View {
     @State var dailyImage:UIImage
+    @Binding var tabSelection: Int
     @State var displayImage: Bool = false
     @State var goToReflectionWritingView: Bool = false
     @State var photoDateData : Date = Date()
@@ -36,7 +37,7 @@ struct DailyHomeView: View {
                             } else {
                                 let fetchOptions = PHFetchOptions()
                                 fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-                                fetchOptions.fetchLimit = 10
+                                fetchOptions.fetchLimit = 10000
                                 let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
                                 
                                 if fetchResult.count > 0 {
@@ -107,12 +108,13 @@ struct DailyHomeView: View {
     //                            )
     //                            .aspectRatio(contentMode: .fit)
                                 .scaledToFill()
-                        }
-                        VStack {
-                            NavigationLink(destination: ReflectionWritingView(dailyImage: $dailyImage)) {
-                                Text("Write Reflection")
-                                    .padding()
-                                    .background(Color.white)
+                            VStack {
+                                Spacer()
+                                NavigationLink(destination: ReflectionWritingView(dailyImage: $dailyImage, date: $photoDateData, tabSelection: $tabSelection)) {
+                                    Text("Write Reflection")
+                                        .padding()
+                                        .background(Color.white)
+                                }
                             }
                         }
                     }
@@ -130,9 +132,9 @@ struct LocationHeadlineView : View {
             .font(.headline)
     }
 }
-
-struct DailyHomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        DailyHomeView(dailyImage: UIImage())
-    }
-}
+//
+//struct DailyHomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DailyHomeView(dailyImage: UIImage(), tabSelection: $0)
+//    }
+//}

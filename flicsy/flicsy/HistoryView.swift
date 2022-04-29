@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct HistoryView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @FetchRequest(entity: Reflection.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \Reflection.date, ascending: false)])
+    var reflections: FetchedResults<Reflection>
+    
     var body: some View {
-        Text("This is where the history view will be!")
+        VStack {
+            List {
+                ForEach(reflections, id: \.self) { reflection in
+                    VStack (alignment: .leading){
+                        Text("\(reflection.title ?? "Untitled")")
+                            .font(.headline)
+                        Text("\(reflection.text ?? "no text in reflection")")
+                    }
+                    
+                }
+            }
+        }
+        
     }
 }
 

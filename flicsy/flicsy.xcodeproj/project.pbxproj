@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		94823BEB2817CEFA00081825 /* CountDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94823BEA2817CEFA00081825 /* CountDown.swift */; };
 		951F133228159AB4004F46BB /* ReflectionWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951F133128159AB4004F46BB /* ReflectionWritingView.swift */; };
+		95A9E9D1281C27F800AEA6FA /* FlicsyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95A9E9CF281C27F800AEA6FA /* FlicsyModel.xcdatamodeld */; };
+		95D9C2B0281C2A7300982FD2 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9C2AF281C2A7300982FD2 /* PersistenceController.swift */; };
 		95DBF850281488CE00662815 /* flicsyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF84F281488CE00662815 /* flicsyApp.swift */; };
 		95DBF852281488CE00662815 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF851281488CE00662815 /* ContentView.swift */; };
 		95DBF854281488D000662815 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95DBF853281488D000662815 /* Assets.xcassets */; };
@@ -42,6 +44,8 @@
 		94823BEA2817CEFA00081825 /* CountDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDown.swift; sourceTree = "<group>"; };
 		951F132F28149343004F46BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		951F133128159AB4004F46BB /* ReflectionWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionWritingView.swift; sourceTree = "<group>"; };
+		95A9E9D0281C27F800AEA6FA /* FlicsyModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlicsyModel.xcdatamodel; sourceTree = "<group>"; };
+		95D9C2AF281C2A7300982FD2 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		95DBF84C281488CE00662815 /* flicsy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flicsy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95DBF84F281488CE00662815 /* flicsyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flicsyApp.swift; sourceTree = "<group>"; };
 		95DBF851281488CE00662815 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 				95DBF851281488CE00662815 /* ContentView.swift */,
 				94823BEA2817CEFA00081825 /* CountDown.swift */,
 				95DBF87B2814895300662815 /* DailyHomeView.swift */,
+				95A9E9CF281C27F800AEA6FA /* FlicsyModel.xcdatamodeld */,
+				95D9C2AF281C2A7300982FD2 /* PersistenceController.swift */,
 				95DBF87D281489B000662815 /* HistoryView.swift */,
 				951F133128159AB4004F46BB /* ReflectionWritingView.swift */,
 				95DBF8792814891100662815 /* TabBarView.swift */,
@@ -274,9 +280,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95D9C2B0281C2A7300982FD2 /* PersistenceController.swift in Sources */,
 				95DBF852281488CE00662815 /* ContentView.swift in Sources */,
 				95DBF87C2814895300662815 /* DailyHomeView.swift in Sources */,
 				951F133228159AB4004F46BB /* ReflectionWritingView.swift in Sources */,
+				95A9E9D1281C27F800AEA6FA /* FlicsyModel.xcdatamodeld in Sources */,
 				94823BEB2817CEFA00081825 /* CountDown.swift in Sources */,
 				95DBF87E281489B000662815 /* HistoryView.swift in Sources */,
 				95DBF87A2814891100662815 /* TabBarView.swift in Sources */,
@@ -611,6 +619,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		95A9E9CF281C27F800AEA6FA /* FlicsyModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				95A9E9D0281C27F800AEA6FA /* FlicsyModel.xcdatamodel */,
+			);
+			currentVersion = 95A9E9D0281C27F800AEA6FA /* FlicsyModel.xcdatamodel */;
+			path = FlicsyModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 95DBF844281488CE00662815 /* Project object */;
 }
