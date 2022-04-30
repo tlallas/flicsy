@@ -20,7 +20,6 @@ struct ReflectionWritingView: View {
     var body: some View {
         Text(date, style: .date) // change the hardcoding
         VStack {
-            
                 TextField(
                     "Untitled Reflection",
                     text: $title
@@ -44,8 +43,21 @@ struct ReflectionWritingView: View {
             let reflection = Reflection(context: managedObjectContext)
             reflection.text = reflectionText
             reflection.title = title
+
+            let tempImage = dailyImage
+            UIGraphicsBeginImageContext(CGSize(width:75, height: 75))
+            tempImage.draw(in: CGRect(x:0, y:0, width:75, height:75))
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            let pngImageData  = dailyImage.pngData()
+            let thumbnailData = newImage?.pngData()
+            
+            reflection.image = pngImageData
+            reflection.thumbnail = thumbnailData
+ 
             PersistenceController.shared.save()
             self.tabSelection = 1
+            
         } label: {
             Text("Submit")
             
