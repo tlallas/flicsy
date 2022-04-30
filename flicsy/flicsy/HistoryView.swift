@@ -18,7 +18,9 @@ struct HistoryView: View {
         VStack {
             List {
                 ForEach(reflections, id: \.self) { reflection in
-                    HStack{
+                    NavigationLink(destination: ReflectionHistoryView(dailyImage:reflection.image!,title: reflection.title ?? "Untitled",  reflection:reflection.text ?? "no text in the reflection")) {
+                    
+                        HStack{
                          if let thumbnailImage = UIImage(data: reflection.thumbnail!){
                             Image(uiImage:thumbnailImage)
                         }
@@ -40,4 +42,5 @@ struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
         HistoryView()
     }
+}
 }
