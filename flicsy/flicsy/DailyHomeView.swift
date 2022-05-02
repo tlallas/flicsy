@@ -19,6 +19,7 @@ struct DailyHomeView: View {
     @State var photoAdministrativeArea : String = "" //state or region
     @State var photoCountry : String = ""
     
+    let format = "(mediaSubtypes & %d) != 0 || (mediaSubtypes & %d) != 0"
     let ceo: CLGeocoder = CLGeocoder()
     
     func reflectionPage() {
@@ -37,7 +38,8 @@ struct DailyHomeView: View {
                             } else {
                                 let fetchOptions = PHFetchOptions()
                                 fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-                                fetchOptions.fetchLimit = 10000
+                                fetchOptions.fetchLimit = 1000
+                                fetchOptions.predicate = NSPredicate(format: "mediaType == \(PHAssetMediaType.image.rawValue) AND !((mediaSubtype & \(PHAssetMediaSubtype.photoScreenshot.rawValue)) == \(PHAssetMediaSubtype.photoScreenshot.rawValue))")
                                 let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
                                 
                                 if fetchResult.count > 0 {
