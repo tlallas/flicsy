@@ -19,7 +19,6 @@ struct DailyHomeView: View {
     @State var photoAdministrativeArea : String = "" //state or region
     @State var photoCountry : String = ""
     
-    let format = "(mediaSubtypes & %d) != 0 || (mediaSubtypes & %d) != 0"
     let ceo: CLGeocoder = CLGeocoder()
     
     func reflectionPage() {
