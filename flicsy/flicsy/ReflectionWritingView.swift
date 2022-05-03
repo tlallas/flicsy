@@ -17,17 +17,44 @@ struct ReflectionWritingView: View {
     @Binding var date: Date
     @Binding var tabSelection: Int
     
+    func happy() {
+    }
+    
+    func sad() {
+    }
+    
+    func food() {
+    }
+    
+    func travel() {
+    }
+        
     var body: some View {
-        Text(date, style: .date) // change the hardcoding
         VStack {
-                TextField(
-                    "Untitled Reflection",
-                    text: $title
-                )
-                TextField(
-                    "Write Reflection",
-                    text: $reflectionText
-                )
+            TextField(
+                "Untitled Reflection for \(date, style: .date)",
+                text: $title
+            )
+            .padding(.all)
+            .multilineTextAlignment(.center)
+
+            Text("Category").frame(maxWidth: .infinity, alignment: .leading).padding(.all)
+            HStack {
+                Spacer()
+                Button("Happy", action: happy)
+                Spacer()
+                Button("Sad", action: sad)
+                Spacer()
+                Button("Food", action: food)
+                Spacer()
+                Button("Travel", action: travel)
+                Spacer()
+            }
+            Text("Write").frame(maxWidth: .infinity, alignment: .leading).padding(.all)
+            TextField(
+                "What were you doing? How did you feel? ...",
+                text: $reflectionText
+            ).padding(.all, 20)
         }
         .textFieldStyle(.roundedBorder)
 //        NavigationLink(destination: CountDown(dailyImage: $dailyImage)) {
@@ -64,9 +91,3 @@ struct ReflectionWritingView: View {
         }
     }
 }
-
-//struct ReflectionWritingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReflectionWritingView()
-//    }
-//}
