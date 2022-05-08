@@ -19,11 +19,11 @@ struct ReflectionHistoryView: View {
     var body: some View {
         VStack {
             Text("\(title)")
-                .font(.headline)
+                .font(.title)
             if let img = UIImage(data:dailyImage){
                 Image(uiImage:img).resizable().scaledToFill()
             }
-            Text("\(date)")
+            Text(date, style: .date)
                 .font(.headline)
             Text("\(country)")
                 .font(.headline)

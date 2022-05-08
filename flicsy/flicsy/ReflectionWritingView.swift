@@ -16,6 +16,10 @@ struct ReflectionWritingView: View {
     @Binding var dailyImage: UIImage
     @Binding var date: Date
     @Binding var tabSelection: Int
+    @Binding var country: String
+    @Binding var adminArea: String
+    @Binding var locality: String
+    
     
     func happy() {
     }
@@ -70,6 +74,11 @@ struct ReflectionWritingView: View {
             let reflection = Reflection(context: managedObjectContext)
             reflection.text = reflectionText
             reflection.title = title
+            reflection.date = date
+            reflection.country = country
+            reflection.administrativeArea = adminArea
+            reflection.locality = locality
+            
 
             let tempImage = dailyImage
             UIGraphicsBeginImageContext(CGSize(width:75, height: 75))

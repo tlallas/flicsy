@@ -30,6 +30,9 @@ struct HistoryView: View {
                         
                         Text("\(reflection.title ?? "Untitled")")
                             .font(.headline)
+                        Text(reflection.date ?? Date(), style: .date)
+                            .font(.subheadline)
+                            
                         Text("\(reflection.text ?? "no text in reflection")")
                     }
                     }
