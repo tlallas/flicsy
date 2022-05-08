@@ -22,17 +22,7 @@ struct ReflectionWritingView: View {
     @State var selectedEmotion = 0
     
     
-    func happy() {
-    }
-    
-    func sad() {
-    }
-    
-    func food() {
-    }
-    
-    func travel() {
-    }
+
         
     var body: some View {
         VStack {
