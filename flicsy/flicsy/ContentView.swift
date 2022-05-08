@@ -16,7 +16,7 @@ struct ContentView: View {
             TabView (selection: $tabSelection){
                 NavigationView {
                     VStack{
-                        DailyHomeView(dailyImage: UIImage(), tabSelection: $tabSelection)
+                        DailyHomeView(tabSelection: $tabSelection, dailyImage: UIImage())
                         Spacer()
                     }
                 }

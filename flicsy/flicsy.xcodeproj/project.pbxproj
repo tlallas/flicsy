@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		94823BEB2817CEFA00081825 /* CountDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94823BEA2817CEFA00081825 /* CountDown.swift */; };
 		951C644328282FDE001234F8 /* EmotionButtonField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C644228282FDE001234F8 /* EmotionButtonField.swift */; };
+		951C64452828665A001234F8 /* DailyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C64442828665A001234F8 /* DailyHomeView.swift */; };
 		951F133228159AB4004F46BB /* ReflectionWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951F133128159AB4004F46BB /* ReflectionWritingView.swift */; };
 		95A9E9D1281C27F800AEA6FA /* FlicsyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95A9E9CF281C27F800AEA6FA /* FlicsyModel.xcdatamodeld */; };
 		95D9C2B0281C2A7300982FD2 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9C2AF281C2A7300982FD2 /* PersistenceController.swift */; };
@@ -20,7 +21,7 @@
 		95DBF86B281488D000662815 /* flicsyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF86A281488D000662815 /* flicsyUITests.swift */; };
 		95DBF86D281488D000662815 /* flicsyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF86C281488D000662815 /* flicsyUITestsLaunchTests.swift */; };
 		95DBF87A2814891100662815 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF8792814891100662815 /* TabBarView.swift */; };
-		95DBF87C2814895300662815 /* DailyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF87B2814895300662815 /* DailyHomeView.swift */; };
+		95DBF87C2814895300662815 /* DailyHomeView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF87B2814895300662815 /* DailyHomeView1.swift */; };
 		95DBF87E281489B000662815 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF87D281489B000662815 /* HistoryView.swift */; };
 		D277744E281DBFF500C96005 /* ReflectionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277744D281DBFF500C96005 /* ReflectionHistoryView.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		94823BEA2817CEFA00081825 /* CountDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDown.swift; sourceTree = "<group>"; };
 		951C644228282FDE001234F8 /* EmotionButtonField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionButtonField.swift; sourceTree = "<group>"; };
+		951C64442828665A001234F8 /* DailyHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHomeView.swift; sourceTree = "<group>"; };
 		951F132F28149343004F46BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		951F133128159AB4004F46BB /* ReflectionWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionWritingView.swift; sourceTree = "<group>"; };
 		95A9E9D0281C27F800AEA6FA /* FlicsyModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlicsyModel.xcdatamodel; sourceTree = "<group>"; };
@@ -60,7 +62,7 @@
 		95DBF86A281488D000662815 /* flicsyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flicsyUITests.swift; sourceTree = "<group>"; };
 		95DBF86C281488D000662815 /* flicsyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flicsyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		95DBF8792814891100662815 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
-		95DBF87B2814895300662815 /* DailyHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHomeView.swift; sourceTree = "<group>"; };
+		95DBF87B2814895300662815 /* DailyHomeView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHomeView1.swift; sourceTree = "<group>"; };
 		95DBF87D281489B000662815 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		D277744D281DBFF500C96005 /* ReflectionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionHistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,7 +119,8 @@
 				95DBF84F281488CE00662815 /* flicsyApp.swift */,
 				95DBF851281488CE00662815 /* ContentView.swift */,
 				94823BEA2817CEFA00081825 /* CountDown.swift */,
-				95DBF87B2814895300662815 /* DailyHomeView.swift */,
+				95DBF87B2814895300662815 /* DailyHomeView1.swift */,
+				951C64442828665A001234F8 /* DailyHomeView.swift */,
 				95A9E9CF281C27F800AEA6FA /* FlicsyModel.xcdatamodeld */,
 				95D9C2AF281C2A7300982FD2 /* PersistenceController.swift */,
 				95DBF87D281489B000662815 /* HistoryView.swift */,
@@ -286,8 +289,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				95D9C2B0281C2A7300982FD2 /* PersistenceController.swift in Sources */,
+				951C64452828665A001234F8 /* DailyHomeView.swift in Sources */,
 				95DBF852281488CE00662815 /* ContentView.swift in Sources */,
-				95DBF87C2814895300662815 /* DailyHomeView.swift in Sources */,
+				95DBF87C2814895300662815 /* DailyHomeView1.swift in Sources */,
 				951F133228159AB4004F46BB /* ReflectionWritingView.swift in Sources */,
 				95A9E9D1281C27F800AEA6FA /* FlicsyModel.xcdatamodeld in Sources */,
 				94823BEB2817CEFA00081825 /* CountDown.swift in Sources */,

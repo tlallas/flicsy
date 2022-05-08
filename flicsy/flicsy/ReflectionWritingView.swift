@@ -84,36 +84,36 @@ struct ReflectionWritingView: View {
     }
 }
 
-var emotionsDictionary =
-    ["happy" : 1,
-     "funny" : 2,
-     "sad" : 3,
-     "love": 4,
-     "travel" : 5,
-     "home" : 6,
-     "food" : 7
-    ]
-
-struct EmotionScrollButtonView : View {
-    @Binding var selection : Int
-    
-    var body: some View {
-        ScrollView (.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach(emotionsDictionary.sorted(by: <), id: \.key) { key, value in
-                    EmotionButtonField(
-                        id: value,
-                        label: key,
-                        color:.black,
-                        bgColor: .blue,
-                        isMarked: $selection.wrappedValue == value ? true : false,
-                        callback: { selected in
-                            self.selection = selected
-                            print("Selection is: \(selected)")
-                        }
-                    )
-                }
-            }
-        }.frame(height: 50)
-    }
-}
+//var emotionsDictionary =
+//    ["happy" : 1,
+//     "funny" : 2,
+//     "sad" : 3,
+//     "love": 4,
+//     "travel" : 5,
+//     "home" : 6,
+//     "food" : 7
+//    ]
+//
+//struct EmotionScrollButtonView : View {
+//    @Binding var selection : Int
+//    
+//    var body: some View {
+//        ScrollView (.horizontal, showsIndicators: false) {
+//            HStack {
+//                ForEach(emotionsDictionary.sorted(by: <), id: \.key) { key, value in
+//                    EmotionButtonField(
+//                        id: value,
+//                        label: key,
+//                        color:.black,
+//                        bgColor: .blue,
+//                        isMarked: $selection.wrappedValue == value ? true : false,
+//                        callback: { selected in
+//                            self.selection = selected
+//                            print("Selection is: \(selected)")
+//                        }
+//                    )
+//                }
+//            }
+//        }.frame(height: 50)
+//    }
+//}
