@@ -18,16 +18,16 @@ struct HistoryView: View {
         
         VStack {
             List {
-                
                 ForEach(reflections, id: \.self) { reflection in
-                    NavigationLink(destination: ReflectionHistoryView(
+                    NavigationLink(destination: HistoryCardView(
                         dailyImage:reflection.image!,
                         title: reflection.title ?? "Untitled",
                         reflection:reflection.text ?? "no text in the reflection",
+                        emotion: reflection.emotion ?? "",
                         locality:reflection.locality ?? "",
                         date:reflection.date ?? Date(),
                         country:reflection.country ?? "",
-                        emotion: reflection.emotion ?? "")) {
+                        region: reflection.administrativeArea ?? "")) {
                     
                         HStack{
                          if let thumbnailImage = UIImage(data: reflection.thumbnail!){
