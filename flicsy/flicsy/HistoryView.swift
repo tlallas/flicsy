@@ -20,7 +20,14 @@ struct HistoryView: View {
             List {
                 
                 ForEach(reflections, id: \.self) { reflection in
-                    NavigationLink(destination: ReflectionHistoryView(dailyImage:reflection.image!,title: reflection.title ?? "Untitled",  reflection:reflection.text ?? "no text in the reflection",locality:reflection.locality ?? "",date:reflection.date ?? Date(),country:reflection.country ?? "")) {
+                    NavigationLink(destination: ReflectionHistoryView(
+                        dailyImage:reflection.image!,
+                        title: reflection.title ?? "Untitled",
+                        reflection:reflection.text ?? "no text in the reflection",
+                        locality:reflection.locality ?? "",
+                        date:reflection.date ?? Date(),
+                        country:reflection.country ?? "",
+                        emotion: reflection.emotion ?? "")) {
                     
                         HStack{
                          if let thumbnailImage = UIImage(data: reflection.thumbnail!){
@@ -32,6 +39,12 @@ struct HistoryView: View {
                             .font(.headline)
                         Text(reflection.date ?? Date(), style: .date)
                             .font(.subheadline)
+                        if let emotion = reflection.emotion {
+                            if let emojiStr = emojiMapDict[emotion] {
+                                Text(emojiStr)
+                                    .font(.body)
+                            }
+                        }
                             
                         Text("\(reflection.text ?? "no text in reflection")")
                     }

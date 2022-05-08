@@ -19,6 +19,7 @@ struct ReflectionWritingView: View {
     @Binding var country: String
     @Binding var adminArea: String
     @Binding var locality: String
+    @State var selectedEmotion = 0
     
     
     func happy() {
@@ -43,17 +44,8 @@ struct ReflectionWritingView: View {
             .multilineTextAlignment(.center)
 
             Text("Category").frame(maxWidth: .infinity, alignment: .leading).padding(.all)
-            HStack {
-                Spacer()
-                Button("Happy", action: happy)
-                Spacer()
-                Button("Sad", action: sad)
-                Spacer()
-                Button("Food", action: food)
-                Spacer()
-                Button("Travel", action: travel)
-                Spacer()
-            }
+            EmotionScrollButtonView(selection: $selectedEmotion)
+            
             Text("Write").frame(maxWidth: .infinity, alignment: .leading).padding(.all)
             TextField(
                 "What were you doing? How did you feel? ...",
@@ -78,6 +70,7 @@ struct ReflectionWritingView: View {
             reflection.country = country
             reflection.administrativeArea = adminArea
             reflection.locality = locality
+            reflection.emotion = emotionsDictionary.first(where: { $0.value == selectedEmotion})?.key
             
 
             let tempImage = dailyImage
@@ -98,5 +91,39 @@ struct ReflectionWritingView: View {
             Text("Submit")
             
         }
+    }
+}
+
+var emotionsDictionary =
+    ["happy" : 1,
+     "funny" : 2,
+     "sad" : 3,
+     "love": 4,
+     "travel" : 5,
+     "home" : 6,
+     "food" : 7
+    ]
+
+struct EmotionScrollButtonView : View {
+    @Binding var selection : Int
+    
+    var body: some View {
+        ScrollView (.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(emotionsDictionary.sorted(by: <), id: \.key) { key, value in
+                    EmotionButtonField(
+                        id: value,
+                        label: key,
+                        color:.black,
+                        bgColor: .blue,
+                        isMarked: $selection.wrappedValue == value ? true : false,
+                        callback: { selected in
+                            self.selection = selected
+                            print("Selection is: \(selected)")
+                        }
+                    )
+                }
+            }
+        }.frame(height: 50)
     }
 }

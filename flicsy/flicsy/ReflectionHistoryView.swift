@@ -14,6 +14,7 @@ struct ReflectionHistoryView: View {
     @State var locality:String
     @State var date:Date
     @State var country:String
+    @State var emotion: String
     
 
     var body: some View {
