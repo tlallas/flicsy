@@ -239,7 +239,7 @@ struct ReflectionCard:View {
                     TextField(
                         "What were you doing? How did you feel? ...",
                         text: $reflectionText
-                    ).padding(.all, 20).frame(width: 300, height: 200, alignment: .top).textFieldStyle(.roundedBorder).onTapGesture {
+                    ).padding(.all, 20).frame(width: 300, height: 200, alignment: .top).onTapGesture {
                         typing = true
                     }
                     Button("Submit", action: submit)
