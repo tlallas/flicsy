@@ -2,8 +2,8 @@
 //  PageControl.swift
 //  App Onboarding
 //
-//  Created by Andreas Schultz on 17.08.19.
-//  Copyright © 2019 Andreas Schultz. All rights reserved.
+//
+//  Created by Taylor  Lallas on 4/23/22.
 //
 
 import Foundation
@@ -19,7 +19,7 @@ struct PageControl: UIViewRepresentable {
     func makeUIView(context: Context) -> UIPageControl {
         let control = UIPageControl()
         control.numberOfPages = numberOfPages
-        control.currentPageIndicatorTintColor = UIColor.blue
+        control.currentPageIndicatorTintColor = UIColor.white
         control.pageIndicatorTintColor = UIColor.gray
 
         return control

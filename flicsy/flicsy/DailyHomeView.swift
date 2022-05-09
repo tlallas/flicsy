@@ -23,19 +23,29 @@ struct DailyHomeView: View {
     @State var photoLocality : String = "" //city
     @State var photoAdministrativeArea : String = "" //state or region
     @State var photoCountry : String = ""
-    
+    @State var waitForNext : Bool = false
     static var date = Date()
     static var calendar = Calendar.current
     static var hours = calendar.component(.hour, from: date)
     static var minutes = calendar.component(.minute, from: date)
     static var seconds = calendar.component(.second, from: date)
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(entity: RevealController.entity(),
+                  sortDescriptors: [])
+    var revealController : FetchedResults<RevealController>
+    
+    
+    
+
+
+    
     let ceo: CLGeocoder = CLGeocoder()
         
     var body: some View {
         Text("Flicsy").font(.title)
         ZStack {
-            if (revealed && submitted) {
+            if ((revealed && submitted) || waitForNext) {
                 CountDownCard(timeRemaining: $totalSecondsInDay).opacity(1) // Replace with secondsRemaining when that works
             } else if (!revealed) {
                 RevealCard().opacity(1).onTapGesture {
@@ -48,6 +58,26 @@ struct DailyHomeView: View {
                                   photoCountry: $photoCountry,
                                   dailyImage: $dailyImage).opacity(1)
                     revealed = true
+                    
+                    let date = Date()
+                    let calendar = Calendar.current
+                    let nextRevealTime = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)
+                    
+                    //FIRST use
+                    if revealController.isEmpty {
+                        let controller = RevealController(context: managedObjectContext)
+                        controller.nextReveal = nextRevealTime
+                        PersistenceController.shared.save()
+                        
+                    }
+                    
+                    //UPDATE existing revealController
+                    for controller in revealController {
+                        controller.nextReveal = nextRevealTime
+                        PersistenceController.shared.save()
+                    }
+                 
+                    
                 }
             } else if (submitted) {
                 ReflectionCard(submitted: $submitted, typing: $typing, date: $photoDateData, dailyImage: $dailyImage, tabSelection: $tabSelection,
@@ -71,7 +101,7 @@ struct DailyHomeView: View {
         .modifier(FlipEffect(flipped: $flipped, angle: flip ? 0 : 180))
         .onTapGesture(count: 1, perform: {
             withAnimation {
-                if (revealed && !submitted && !typing) {
+                if (!waitForNext && revealed && !submitted && !typing) {
                     flip.toggle()
                 }
                 if (typing) {
@@ -81,7 +111,12 @@ struct DailyHomeView: View {
         })
         VStack {
             Spacer(minLength: DailyFlicCard.spacerHeight)
-        }
+        }.onAppear(perform: {
+            revealed = getRevealed(results: revealController)
+            if (revealed) {
+                waitForNext = true
+            }
+        })
     }
     
     //Convert the time into seconds
@@ -376,4 +411,28 @@ struct EmotionScrollButtonView : View {
             }
         }.frame(height: 50)
     }
+}
+
+func getRevealed(results: FetchedResults<RevealController>) -> Bool {
+    let currDate = Date()
+    print(results)
+    if (!results.isEmpty) {
+        for result in results {
+            print("NEXT REVEAL IS")
+   
+            if let next = result.nextReveal {
+                print(next)
+                print(currDate)
+                if (currDate > next) {
+                    print("curr date greater than next")
+                    return false;
+                } else {
+                    print("curr date leq")
+                    return true
+                }
+            }
+        }
+    }
+    print("returning false")
+    return false;
 }

@@ -2,8 +2,7 @@
 //  OnboardingView.swift
 //  App Onboarding
 //
-//  Created by Andreas Schultz on 10.08.19.
-//  Copyright © 2019 Andreas Schultz. All rights reserved.
+//  Created by Taylor  Lallas on 4/23/22.
 //
 
 import SwiftUI
@@ -14,33 +13,27 @@ struct OnboardingView: View {
     @FetchRequest(entity: User.entity(),sortDescriptors:[])
     var user: FetchedResults<User>
     
-    var subviews = [
-        UIHostingController(rootView: Subview(imageString: "meditating")),
-        UIHostingController(rootView: Subview(imageString: "skydiving")),
-        UIHostingController(rootView: Subview(imageString: "sitting"))
-    ]
+    var titles = ["Welcome to Flicsy", "We think reflection is awesome", "Look back on all your memories","Get Started"]
     
-    var titles = ["Welcome to Flicsy", "Set Photo Permissions", "Get Started"]
-    
-    var captions =  ["Take your time out and bring awareness into your everyday life", "Please give us access", "Regular medidation sessions creates a peaceful inner mind"]
+    var captions =  ["Each day you will receive a random photo surprise from your camera roll", "You will have the opportunity to write a reflection on the memory captured in your daily photo", "Over time, you will build a collection of photo reflections to help you remember and relive all your favorite moments", "To begin, please give us access to your camera roll"]
     
     @State var currentPageIndex = 0
-    
+    let exampleColor : Color = Color(red: 147/255, green: 174/255, blue: 212/255)
     
     var body: some View {
-        VStack(alignment: .leading) {
-            PageViewController(currentPageIndex: $currentPageIndex, viewControllers: subviews)
+        ZStack { // 1
+            exampleColor.ignoresSafeArea() // 2
+        VStack(alignment: .center) {
             Group {
                 Text(titles[currentPageIndex])
-                    .font(.title)
-                
-                
+                    .font(.title).multilineTextAlignment(.center).foregroundColor(.white)
+                Text(captions[currentPageIndex])
+                    .font(.subheadline).multilineTextAlignment(.center).foregroundColor(.white)
             }
-                .padding()
-         
-             
-          
-            PageControl(numberOfPages: subviews.count, currentPageIndex: $currentPageIndex)
+            .padding([.top], 80)
+            Spacer()
+            PageControl(numberOfPages: titles.count, currentPageIndex: $currentPageIndex)
+            
             HStack {
                 
                 Button(action: {
@@ -50,12 +43,15 @@ struct OnboardingView: View {
                 }) {
                     ButtonLeftContent()
                 }
+                Spacer()
                 Button(action: {
-                    if self.currentPageIndex+1 == self.subviews.count {
+                    if self.currentPageIndex+1 == self.titles.count {
                         user[0].isNewUser = false
                         PersistenceController.shared.save()
-                    } else if self.currentPageIndex == 0{
+                    }
+                    else if self.currentPageIndex == 2{
                     retrieveTodaysFlic()
+                        self.currentPageIndex += 1
                     }
                     else {
                         self.currentPageIndex += 1
@@ -65,7 +61,7 @@ struct OnboardingView: View {
                 }
             }
                 .padding()
-        }
+        }}
     }
 }
 
@@ -77,24 +73,22 @@ func retrieveTodaysFlic() {
 
 struct ButtonRightContent: View {
     var body: some View {
-        Image(systemName: "arrow.right")
+        Image(systemName: "chevron.right")
         .resizable()
         .foregroundColor(.white)
-        .frame(width: 15, height: 15)
+        .frame(width: 10, height: 20)
         .padding()
-        .background(Color.blue)
         .cornerRadius(30)
     }
 }
 
 struct ButtonLeftContent: View {
     var body: some View {
-        Image(systemName: "arrow.left")
+        Image(systemName: "chevron.left")
         .resizable()
         .foregroundColor(.white)
-        .frame(width: 15, height: 15)
+        .frame(width: 10, height: 20)
         .padding()
-        .background(Color.blue)
         .cornerRadius(30)
     }
 }
