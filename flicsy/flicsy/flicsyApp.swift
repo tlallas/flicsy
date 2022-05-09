@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import UIKit
+import PhotosUI
 
 @main
 struct flicsyApp: App {
@@ -16,6 +18,11 @@ struct flicsyApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistentController.container.viewContext)
+                .onAppear(perform: {
+                    if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
+                    PHPhotoLibrary.requestAuthorization({(status: PHAuthorizationStatus) -> Void in ()
+                    })
+                }})
         }
         .onChange(of: scenePhase) { (newScenePhase) in
             switch newScenePhase {
