@@ -17,44 +17,44 @@ struct ContentView: View {
     
     var body: some View {
         
-        VStack(){
+        VStack() {
             if user.count == 0 {
                 OnboardingView()
             }
             else if user[0].isNewUser == true {
                 OnboardingView()
             } else {
-            TabView (selection: $tabSelection){
-                NavigationView {
-                    VStack{
-                        DailyHomeView(tabSelection: $tabSelection, dailyImage: UIImage())
+                TabView (selection: $tabSelection) {
+                    NavigationView {
+                        VStack{
+                            DailyHomeView(tabSelection: $tabSelection, dailyImage: UIImage())
 
-                        Spacer()
+                            Spacer()
+                        }
                     }
-                }
-                .tag(0)
-                .tabItem {
-                    Image(systemName: "house")
-                        .resizable()
-                    Text("Today's Flic")
-                }
+                    .tag(0)
+                    .tabItem {
+                        Image(systemName: "house")
+                            .resizable()
+                        Text("Today's Flic")
+                    }
 
-                NavigationView {
-                    VStack {
-                        HistoryView()
-                        Spacer()
+                    NavigationView {
+                        VStack {
+                            HistoryView()
+                            Spacer()
+                        }
                     }
-                }
-                .tag(1)
-                .tabItem {
-                    Image(systemName: "clock")
-                    Text("History")
-                }
-            }.padding(.bottom, 5)
+                    .tag(1)
+                    .tabItem {
+                        Image(systemName: "clock")
+                        Text("History")
+                    }
+                }.padding(.bottom, 5)
             }
-        }
+        }.background(Color("BackgroundColor"))
     }
-    }
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
