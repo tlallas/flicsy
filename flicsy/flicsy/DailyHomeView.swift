@@ -292,8 +292,9 @@ struct ReflectionCard:View {
                         typing = true
                     }
                     
-                    Text("Category").frame(maxWidth: .infinity, alignment: .leading).padding(.all)
-                    EmotionScrollButtonView(selection: $selectedEmotion)
+                    HStack {
+                        EmotionScrollButtonView(selection: $selectedEmotion)
+                    }.padding()
                     Text("Write").frame(maxWidth: .infinity, alignment: .leading).padding(.all)
                     TextField(
                         "What were you doing? How did you feel? ...",
@@ -405,12 +406,12 @@ struct FlipEffect: GeometryEffect {
 
 var emotionsDictionary =
     ["happy" : 1,
-     "funny" : 2,
+     "silly" : 2,
      "sad" : 3,
-     "love": 4,
-     "travel" : 5,
-     "home" : 6,
-     "food" : 7
+     "in love": 4,
+     "meh" : 5,
+//     "home" : 6,
+//     "food" : 7
     ]
 
 struct EmotionScrollButtonView : View {
