@@ -139,11 +139,7 @@ struct HistoryReflectionCard:View {
                     } else {
                         Text("Category").frame(maxWidth: .infinity, alignment: .leading).padding(.all).font(.title)
                         VStack(alignment: .center) {
-                            if let emojiStr = emojiMapDict[emotion] {
-                                Text(emojiStr)
-                                    .font(.body)
-                                Text(emotion).font(.body)
-                            }
+                            Image(emotion)
                         }.padding()
                     }
                     if (reflection == "") {

@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import UIKit
+
 var emotions =
     ["happy" : 1,
-     "funny" : 2,
+     "silly" : 2,
      "sad" : 3,
-     "love": 4,
-     "travel" : 5,
-     "home" : 6,
-     "food" : 7
+     "in love": 4,
+     "meh" : 5,
+//     "home" : 6,
+//     "food" : 7
     ]
 
 var emojiMapDict = [
@@ -22,8 +24,8 @@ var emojiMapDict = [
      "sad" : "\u{1F614}",
      "love": "\u{1F60D}",
      "travel" : "\u{2708}",
-     "home" : "\u{1F3E0}",
-     "food" : "\u{1F354}"
+//     "home" : "\u{1F3E0}",
+//     "food" : "\u{1F354}"
 ]
 
 struct EmotionButtonField: View {
@@ -66,13 +68,15 @@ struct EmotionButtonField: View {
 //                    .clipShape(Circle())
 //                    .foregroundColor(self.bgColor)
 //                    .padding(.bottom, 2)
-                Text(emojiMapDict[label] ?? "")
+//                Text(emojiMapDict[label] ?? "")
+                Image(label)
                 Text(label)
                     .font(Font.system(size: textSize))
                 Spacer()
             }.padding()
             .foregroundColor(self.color)
-                .background(self.isMarked ? Color.yellow : Color.white)
+            .background(self.isMarked ? Color("AccentColor") : Color.white)
+            .cornerRadius(12)
                
         }
         .foregroundColor(Color.white)
