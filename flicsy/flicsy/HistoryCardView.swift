@@ -55,37 +55,57 @@ struct HistoryFlicCard:View {
 
     
     var body:some View {
-        RoundedRectangle(cornerRadius: 10)
-            .fill(Color.white)
-            .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
-            .shadow(color: .gray, radius: 10, x: 5, y: 5)
-            .overlay(
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color(.white))
+                .aspectRatio(9/16, contentMode: .fit)
+            if let img = UIImage(data:dailyImage){
+                Image(uiImage:img).resizable().aspectRatio(contentMode: .fill)
+                    .layoutPriority(-1).cornerRadius(10).shadow(color: .gray, radius: 5, x: 2, y: 2)
+            }
+            ZStack {
+                Rectangle().fill(Color(.black)).frame(width: DailyFlicCard.width, height: 100, alignment: .bottom).opacity(0.3)
                 VStack {
-                    if let img = UIImage(data:dailyImage){
-                        Image(uiImage:img).resizable().scaledToFill().frame(width: DailyFlicCard.imageWidth, height: DailyFlicCard.imageHeight, alignment: .center).scaledToFit()
-                    }
-                    HStack {
-                        Text(date, style: .date)
-                            .font(.title2)
-                        Spacer()
-                    }.padding(.leading)
-                    HStack {
+                    Text(date, style: .date)
+                        .font(.title2).foregroundColor(Color.white).frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
+                    if country != "" {
                         if locality != "" && region != "" {
-                            Text(locality + ", " + region).font(.headline)
-                        } else if region != "" {
-                            Text(region).font(.headline)
-                        } else if locality != "" {
-                            Text(locality).font(.headline)
-                        }
-                        if country != "" {
-                            Text("|  " + country)
+                            Text(locality + ", " + region + "|  " + country)
                                 .font(.headline)
+                                .foregroundColor(Color.white)
+                                .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
+                        } else if region != "" {
+                            Text(region + "|  " + country)
+                                .font(.headline)
+                                .foregroundColor(Color.white)
+                                .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
+                        } else if locality != "" {
+                            Text(locality + "|  " + country)
+                                .font(.headline)
+                                .foregroundColor(Color.white)
+                                .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
                         }
-                        Spacer()
-                    }.padding(.leading)
-                    
+                    } else {
+                        if locality != "" && region != "" {
+                            Text(locality + ", " + region)
+                                .font(.headline)
+                                .foregroundColor(Color.white)
+                                .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
+                        } else if region != "" {
+                            Text(region)
+                                .font(.headline)
+                                .foregroundColor(Color.white)
+                                .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
+                        } else if locality != "" {
+                            Text(locality)
+                                .font(.headline)
+                                .foregroundColor(Color.white)
+                                .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
+                        }
+                    }
                 }
-            )
+            }.frame(maxHeight: DailyFlicCard.height, alignment: .bottom)
+        }.clipped().cornerRadius(10)
     }
 }
 
