@@ -13,37 +13,70 @@ struct OnboardingView: View {
     @FetchRequest(entity: User.entity(),sortDescriptors:[])
     var user: FetchedResults<User>
     
-    var titles = ["Welcome to Flicsy", "We think reflection is awesome", "Look back on all your memories","Get Started"]
+    var titles = ["welcome to", "", "",""]
     
-    var captions =  ["Each day you will receive a random photo surprise from your camera roll", "You will have the opportunity to write a reflection on the memory captured in your daily photo", "Over time, you will build a collection of photo reflections to help you remember and relive all your favorite moments", "To begin, please give us access to your camera roll"]
+    var headlines =  ["personal photo journaling", "get a random photo surprise", "reflect on your photo", "look back on all your mems"]
+    
+    var subheadlines = ["for mindfulness, memories, & reflection", "every day from your camera roll", "to capture and relive your memories", "by viewing your photo reflection history"]
+    
     
     @State var currentPageIndex = 0
     let exampleColor : Color = Color(red: 147/255, green: 174/255, blue: 212/255)
     
     var body: some View {
         ZStack { // 1
-            exampleColor.ignoresSafeArea() // 2
+            Color("BackgroundColor").ignoresSafeArea() // 2
+            Image("onboardingEllipse").padding(.top, -260).ignoresSafeArea()
         VStack(alignment: .center) {
             Group {
-                Text(titles[currentPageIndex])
-                    .font(.title).multilineTextAlignment(.center).foregroundColor(.white)
-                Text(captions[currentPageIndex])
-                    .font(.subheadline).multilineTextAlignment(.center).foregroundColor(.white)
-            }
+                if self.currentPageIndex == 0 {
+                    VStack {
+                        Text(titles[currentPageIndex])
+                            .font(.headline)
+                            .padding(.bottom)
+                        Text("flicsy")
+                            .font(.system(size: 80.0))
+                            .fontWeight(.bold)
+                            .padding(.top)
+                    }
+                } else if self.currentPageIndex == 1 {
+                    Image("gift").padding(.top, 75)
+                } else if self.currentPageIndex == 2 {
+                    Image("reflectOnboard")
+                        .resizable()
+                        .frame(width: 320, height: 277)
+                        .padding(.top, 65)
+                }
+
+
+            }.foregroundColor(Color("PrimaryColor"))
             .padding([.top], 80)
             Spacer()
+            
+            VStack {
+                Text(headlines[currentPageIndex])
+                    .font(.headline)
+                Text(subheadlines[currentPageIndex])
+                    .font(.subheadline)
+                    .fontWeight(.light)
+            }.foregroundColor(Color("PrimaryColor"))
+                .padding(.bottom, 80)
+           
             PageControl(numberOfPages: titles.count, currentPageIndex: $currentPageIndex)
             
             HStack {
-                
                 Button(action: {
                     if self.currentPageIndex > 0 {
                         self.currentPageIndex = self.currentPageIndex - 1
                     }
                 }) {
-                    ButtonLeftContent()
+                    if (self.currentPageIndex > 0) {
+                        ButtonLeftContent()
+                    }
                 }
-                Spacer()
+                if self.currentPageIndex > 0 {
+                    Spacer()
+                }
                 Button(action: {
                     if self.currentPageIndex+1 == self.titles.count {
                         user[0].isNewUser = false
@@ -57,10 +90,18 @@ struct OnboardingView: View {
                         self.currentPageIndex += 1
                     }
                 }) {
-                    ButtonRightContent()
+                    if (self.currentPageIndex == 0) {
+                        ButtonStartContent()
+                    } else if self.currentPageIndex == 3 {
+                        ButtonFinishContent()
+                    } else {
+                        ButtonRightContent()
+                    }
                 }
-            }
-                .padding()
+            }.padding(.top)
+                .padding(.trailing, 25)
+                .padding(.leading, 25)
+                .padding(.bottom, 75)
         }}
     }
 }
@@ -73,23 +114,61 @@ func retrieveTodaysFlic() {
 
 struct ButtonRightContent: View {
     var body: some View {
-        Image(systemName: "chevron.right")
-        .resizable()
-        .foregroundColor(.white)
-        .frame(width: 10, height: 20)
-        .padding()
-        .cornerRadius(30)
+        HStack {
+            Text("Next").foregroundColor(Color.white)
+            Image(systemName: "chevron.right")
+            .resizable()
+            .foregroundColor(Color.white)
+            .frame(width: 10, height: 20)
+            .cornerRadius(30)
+        }.padding()
+            .background(Color("PrimaryColor")
+                .cornerRadius(40))
     }
 }
 
 struct ButtonLeftContent: View {
     var body: some View {
-        Image(systemName: "chevron.left")
-        .resizable()
-        .foregroundColor(.white)
-        .frame(width: 10, height: 20)
-        .padding()
-        .cornerRadius(30)
+        HStack {
+            Image(systemName: "chevron.left")
+            .resizable()
+            .foregroundColor(Color.white)
+            .frame(width: 10, height: 20)
+            .cornerRadius(30)
+            Text("Prev").foregroundColor(Color.white)
+        }.padding()
+            .background(Color("PrimaryColor"))
+            .cornerRadius(40)
+    }
+}
+
+struct ButtonStartContent: View {
+    var body: some View {
+        HStack {
+            Text("Get Started").foregroundColor(Color.white)
+            Image(systemName: "chevron.right")
+            .resizable()
+            .foregroundColor(Color.white)
+            .frame(width: 10, height: 20)
+            .cornerRadius(30)
+        }.padding()
+            .background(Color("PrimaryColor")
+                .cornerRadius(40))
+    }
+}
+
+struct ButtonFinishContent: View {
+    var body: some View {
+        HStack {
+            Text("Finish").foregroundColor(Color.white)
+            Image(systemName: "chevron.right")
+            .resizable()
+            .foregroundColor(Color.white)
+            .frame(width: 10, height: 20)
+            .cornerRadius(30)
+        }.padding()
+            .background(Color("PrimaryColor")
+                .cornerRadius(40))
     }
 }
 
