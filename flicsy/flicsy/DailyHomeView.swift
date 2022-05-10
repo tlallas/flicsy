@@ -331,8 +331,8 @@ struct ReflectionCard:View {
         
 
         let tempImage = dailyImage
-        UIGraphicsBeginImageContext(CGSize(width:75, height: 75))
-        tempImage.draw(in: CGRect(x:0, y:0, width:75, height:75))
+        UIGraphicsBeginImageContext(CGSize(width:75, height: 100))
+        tempImage.draw(in: CGRect(x:0, y:0, width:75, height: 100))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         let pngImageData  = dailyImage.pngData()
