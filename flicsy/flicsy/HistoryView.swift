@@ -40,10 +40,7 @@ struct HistoryView: View {
                         Text(reflection.date ?? Date(), style: .date)
                             .font(.subheadline)
                         if let emotion = reflection.emotion {
-                            if let emojiStr = emojiMapDict[emotion] {
-                                Text(emojiStr)
-                                    .font(.body)
-                            }
+                            Image(emotion)
                         }
                             
                         Text("\(reflection.text ?? "no text in reflection")")
