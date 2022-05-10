@@ -66,8 +66,7 @@ struct HistoryView: View {
                                         .cornerRadius(30)
                                 }
                             }
-                                
-                        }
+                        }.padding(.leading, 5)
                         }
                     }
                 }
