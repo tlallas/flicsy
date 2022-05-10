@@ -20,7 +20,7 @@ struct HistoryCardView: View {
         ZStack {
             HistoryReflectionCard(title: $title,
                                   reflection: $reflection,
-                                  emotion: $emotion).opacity(flipped ? 0 : 1)
+                                  emotion: $emotion,dailyImage: $dailyImage).opacity(flipped ? 0 : 1)
             HistoryFlicCard(date: $date,
                           locality: $locality,
                           region: $region,
@@ -38,6 +38,7 @@ struct HistoryCardView: View {
         }
     }
 }
+
 
 struct HistoryFlicCard:View {
     @Binding var date : Date
@@ -82,6 +83,7 @@ struct HistoryFlicCard:View {
                         }
                         Spacer()
                     }.padding(.leading)
+                    
                 }
             )
     }
@@ -91,6 +93,13 @@ struct HistoryReflectionCard:View {
     @Binding var title:String
     @Binding var reflection:String
     @Binding var emotion: String
+    @Binding var dailyImage: Data
+    
+    func shareButton() {
+            let activityController = UIActivityViewController(activityItems: [reflection,dailyImage], applicationActivities: nil)
+
+            UIApplication.shared.windows.first?.rootViewController!.present(activityController, animated: true, completion: nil)
+    }
 
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
@@ -103,6 +112,7 @@ struct HistoryReflectionCard:View {
                         Text("Untitled Reflection").font(.largeTitle).padding()
                     } else {
                         Text(title).font(.largeTitle).padding()
+
                     }
                     if (emotion == "") {
                         Text("").frame(maxWidth: .infinity, alignment: .center).padding(.all).font(.title)
@@ -122,6 +132,10 @@ struct HistoryReflectionCard:View {
                         Text("Your Reflection").frame(maxWidth: .infinity, alignment: .leading).padding().font(.title)
                         Text(reflection)
                             .padding().font(.body)
+                    }
+                    Button(action: shareButton) {
+                        Image(systemName: "square.and.arrow.up")
+                                .foregroundColor(.black)
                     }
                 }
             )

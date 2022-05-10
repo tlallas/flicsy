@@ -42,7 +42,7 @@ struct ReflectionWritingView: View {
                 text: $reflectionText
             ).padding(.all, 20)
         }
-        .textFieldStyle(.roundedBorder)
+        //.textFieldStyle(.roundedBorder)
 //        NavigationLink(destination: CountDown(dailyImage: $dailyImage)) {
 //            Text("Submit")
 //                .padding()

@@ -10,6 +10,7 @@
 		9497F27B282872F30027B745 /* HistoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9497F27A282872F30027B745 /* HistoryCardView.swift */; };
 		951C644328282FDE001234F8 /* EmotionButtonField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C644228282FDE001234F8 /* EmotionButtonField.swift */; };
 		951C64452828665A001234F8 /* DailyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C64442828665A001234F8 /* DailyHomeView.swift */; };
+		951C6447282A0072001234F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C6446282A0072001234F8 /* SceneDelegate.swift */; };
 		95A9E9D1281C27F800AEA6FA /* FlicsyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95A9E9CF281C27F800AEA6FA /* FlicsyModel.xcdatamodeld */; };
 		95D9C2B0281C2A7300982FD2 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9C2AF281C2A7300982FD2 /* PersistenceController.swift */; };
 		95DBF850281488CE00662815 /* flicsyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF84F281488CE00662815 /* flicsyApp.swift */; };
@@ -21,6 +22,10 @@
 		95DBF86D281488D000662815 /* flicsyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF86C281488D000662815 /* flicsyUITestsLaunchTests.swift */; };
 		95DBF87A2814891100662815 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF8792814891100662815 /* TabBarView.swift */; };
 		95DBF87E281489B000662815 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF87D281489B000662815 /* HistoryView.swift */; };
+		D252DE9D28287A8B005A6964 /* Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252DE9928287A8A005A6964 /* Subview.swift */; };
+		D252DE9F28287A8B005A6964 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252DE9B28287A8A005A6964 /* OnboardingView.swift */; };
+		D252DEA628287A97005A6964 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252DEA328287A97005A6964 /* PageControl.swift */; };
+		D252DEAD28287AE3005A6964 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D252DEAC28287AE3005A6964 /* LaunchScreen.storyboard */; };
 		D277744E281DBFF500C96005 /* ReflectionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277744D281DBFF500C96005 /* ReflectionHistoryView.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +50,7 @@
 		9497F27A282872F30027B745 /* HistoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCardView.swift; sourceTree = "<group>"; };
 		951C644228282FDE001234F8 /* EmotionButtonField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionButtonField.swift; sourceTree = "<group>"; };
 		951C64442828665A001234F8 /* DailyHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHomeView.swift; sourceTree = "<group>"; };
+		951C6446282A0072001234F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ../SceneDelegate.swift; sourceTree = "<group>"; };
 		951F132F28149343004F46BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		95A9E9D0281C27F800AEA6FA /* FlicsyModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlicsyModel.xcdatamodel; sourceTree = "<group>"; };
 		95D9C2AF281C2A7300982FD2 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
@@ -60,6 +66,10 @@
 		95DBF86C281488D000662815 /* flicsyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flicsyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		95DBF8792814891100662815 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		95DBF87D281489B000662815 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		D252DE9928287A8A005A6964 /* Subview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subview.swift; sourceTree = "<group>"; };
+		D252DE9B28287A8A005A6964 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		D252DEA328287A97005A6964 /* PageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
+		D252DEAC28287AE3005A6964 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D277744D281DBFF500C96005 /* ReflectionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionHistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +122,10 @@
 			isa = PBXGroup;
 			children = (
 				951F132F28149343004F46BB /* Info.plist */,
+				D252DE9B28287A8A005A6964 /* OnboardingView.swift */,
+				951C6446282A0072001234F8 /* SceneDelegate.swift */,
+				D252DEA328287A97005A6964 /* PageControl.swift */,
+				D252DE9928287A8A005A6964 /* Subview.swift */,
 				95DBF84F281488CE00662815 /* flicsyApp.swift */,
 				95DBF851281488CE00662815 /* ContentView.swift */,
 				951C64442828665A001234F8 /* DailyHomeView.swift */,
@@ -124,6 +138,7 @@
 				95DBF853281488D000662815 /* Assets.xcassets */,
 				95DBF855281488D000662815 /* Preview Content */,
 				D277744D281DBFF500C96005 /* ReflectionHistoryView.swift */,
+				D252DEAC28287AE3005A6964 /* LaunchScreen.storyboard */,
 			);
 			path = flicsy;
 			sourceTree = "<group>";
@@ -257,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95DBF857281488D000662815 /* Preview Assets.xcassets in Resources */,
+				D252DEAD28287AE3005A6964 /* LaunchScreen.storyboard in Resources */,
 				95DBF854281488D000662815 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,12 +302,17 @@
 				9497F27B282872F30027B745 /* HistoryCardView.swift in Sources */,
 				951C64452828665A001234F8 /* DailyHomeView.swift in Sources */,
 				95DBF852281488CE00662815 /* ContentView.swift in Sources */,
+				D252DE9D28287A8B005A6964 /* Subview.swift in Sources */,
+				951C6447282A0072001234F8 /* SceneDelegate.swift in Sources */,
+				95DBF852281488CE00662815 /* ContentView.swift in Sources */,
 				95A9E9D1281C27F800AEA6FA /* FlicsyModel.xcdatamodeld in Sources */,
 				95DBF87E281489B000662815 /* HistoryView.swift in Sources */,
+				D252DEA628287A97005A6964 /* PageControl.swift in Sources */,
 				95DBF87A2814891100662815 /* TabBarView.swift in Sources */,
 				D277744E281DBFF500C96005 /* ReflectionHistoryView.swift in Sources */,
 				95DBF850281488CE00662815 /* flicsyApp.swift in Sources */,
 				951C644328282FDE001234F8 /* EmotionButtonField.swift in Sources */,
+				D252DE9F28287A8B005A6964 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
