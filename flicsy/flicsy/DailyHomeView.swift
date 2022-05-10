@@ -188,6 +188,7 @@ struct RevealCard:View {
                 .resizable()
                 .cornerRadius(10)
                 .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
+                .shadow(color: .gray, radius: 5, x: 2, y: 2)
                 .overlay(
                     VStack {
                         Text("Reveal")
@@ -198,7 +199,7 @@ struct RevealCard:View {
                                     .foregroundColor(Color("PrimaryColor"))
                         }
                 )
-        }.cornerRadius(10)
+        }.cornerRadius(10).shadow(color: .gray, radius: 5, x: 2, y: 2)
     }
 }
 
@@ -280,8 +281,8 @@ struct ReflectionCard:View {
     @Binding var photoLocality : String //city
     @Binding var photoAdministrativeArea : String //state or region
     @Binding var photoCountry : String
-    @State private var reflectionText: String = ""
-    @State private var title: String = ""
+    @State private var reflectionText: String = "Write reflection..."
+    @State private var title: String = "Untitled Reflection"
     @State var selectedEmotion = 0
     
 
@@ -292,32 +293,75 @@ struct ReflectionCard:View {
             .shadow(color: .gray, radius: 10, x: 5, y: 5)
             .overlay(
                 VStack {
-                    TextField(
-                        "Untitled Reflection for \(date, style: .date)",
-                        text: $title
-                    )
-                    .padding(.all)
-                    .multilineTextAlignment(.center)
-                    .onTapGesture {
-                        typing = true
-                    }
-                    
+                    TextEditor(text: $title)
+                        .frame(maxWidth: (DailyFlicCard.width * 0.85), maxHeight: (DailyFlicCard.height * 0.1), alignment: .center)
+                        .multilineTextAlignment(.center)
+                        .opacity((title == "Untitled Reflection") ? 0.90 : 1)
+                        .font(.largeTitle)
+                        .foregroundColor((title == "Untitled Reflection") ? .gray : Color("PrimaryColor"))
+                        .lineLimit(1).onAppear {
+                            // remove the placeholder text when keyboard appears
+                            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
+                                withAnimation {
+                                    if title == "Untitled Reflection" {
+                                        title = ""
+                                    }
+                                }
+                            }
+                            
+                            // put back the placeholder text if the user dismisses the keyboard without adding any text
+                            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
+                                withAnimation {
+                                    if title == "" {
+                                        title = "Write reflection..."
+                                    }
+                                }
+                            }
+                        }.onTapGesture {
+                            typing = true
+                        }
+
+                    Text("How did this image make you feel?")
+                        .font(.title2)
+                        .foregroundColor(Color("PrimaryColor"))
+                        .frame(maxWidth: (DailyFlicCard.width * 0.85), alignment: .leading)
                     HStack {
                         EmotionScrollButtonView(selection: $selectedEmotion)
                     }.padding()
-                    Text("Write").frame(maxWidth: .infinity, alignment: .leading).padding(.all)
-                    TextField(
-                        "What were you doing? How did you feel? ...",
-                        text: $reflectionText
-                    ).padding(.all, 20).frame(width: 300, height: 200, alignment: .top).onTapGesture {
+                    TextEditor(text: $reflectionText)
+                        .frame(width: (DailyFlicCard.width * 0.85), height: (DailyFlicCard.height * 0.23), alignment: .center)
+                        .multilineTextAlignment(.leading)
+                        .opacity((reflectionText == "Write reflection...") ? 0.90 : 1)
+                        .foregroundColor((reflectionText == "Write reflection...") ? .gray : Color("PrimaryColor"))
+                        .lineLimit(100).onAppear {
+                            // remove the placeholder text when keyboard appears
+                            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
+                                withAnimation {
+                                    if reflectionText == "Write reflection..." {
+                                        reflectionText = ""
+                                    }
+                                }
+                            }
+                            
+                            // put back the placeholder text if the user dismisses the keyboard without adding any text
+                            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
+                                withAnimation {
+                                    if reflectionText == "" {
+                                        reflectionText = "Write reflection..."
+                                    }
+                                }
+                            }
+                        }.onTapGesture {
                         typing = true
-                    }
-                    Button("Submit", action: submit)
+                        }
+                    HStack {
+                        Button(" Submit ", action: submit)
+                            .foregroundColor(.white)
+                    }.padding().background(Color("PrimaryColor")).cornerRadius(40)
                 }
             )
     }
-    
-    
+        
     func submit() {
         submitted = true
         let reflection = Reflection(context: managedObjectContext)
@@ -355,6 +399,7 @@ struct CountDownCard:View {
             .resizable()
             .cornerRadius(10)
             .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
+            .shadow(color: .gray, radius: 5, x: 2, y: 2)
             .overlay(
                 VStack {
                     Text("Next reveal in...")
