@@ -44,7 +44,10 @@ struct DailyHomeView: View {
     let ceo: CLGeocoder = CLGeocoder()
         
     var body: some View {
-        Text("Flicsy").font(.title)
+        Text("flicsy")
+            .foregroundColor(Color("PrimaryColor"))
+            .font(.title)
+            .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
         ZStack {
             if ((revealed && submitted) || waitForNext) {
                 CountDownCard(timeRemaining: $countDownTime).opacity(1) 
@@ -180,15 +183,22 @@ struct DailyHomeView: View {
 
 struct RevealCard:View {
     var body:some View {
-        RoundedRectangle(cornerRadius: 10)
-            .fill(Color.gray)
-            .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
-            .shadow(color: .gray, radius: 10, x: 5, y: 5)
-            .overlay(
-                VStack {
-                    Text("Reveal").foregroundColor(.white).font(.largeTitle)
-                }
-            )
+        ZStack {
+            Image("RevealBackground")
+                .resizable()
+                .cornerRadius(10)
+                .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
+                .overlay(
+                    VStack {
+                        Text("Reveal")
+                            .foregroundColor(Color("PrimaryColor"))
+                            .font(.largeTitle)
+                        Text("New photo available!")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color("PrimaryColor"))
+                        }
+                )
+        }.cornerRadius(10)
     }
 }
 
@@ -340,18 +350,20 @@ struct CountDownCard:View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body:some View {
-        return RoundedRectangle(cornerRadius: 10)
-            .fill(Color.gray)
+        return Image("CountdownBackground")
+            .resizable()
+            .cornerRadius(10)
             .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
-            .shadow(color: .gray, radius: 10, x: 5, y: 5)
             .overlay(
                 VStack {
-                    Text("Next Random Flic in...").foregroundColor(.white).font(.largeTitle)
+                    Text("Next reveal in...")
+                        .foregroundColor(Color("PrimaryColor"))
+                        .font(.largeTitle)
                     Text("\(timeString(time: timeRemaining))")
                                 .font(.system(size: 60))
                                 .frame(height: 80.0)
                                 .frame(minWidth: 0, maxWidth: .infinity)
-                                .foregroundColor(.white)
+                                .foregroundColor(Color("PrimaryColor"))
                                 .onReceive(timer){ _ in
                                     if self.timeRemaining > 0 {
                                         self.timeRemaining -= 1
