@@ -16,7 +16,6 @@ struct DailyHomeView: View {
     @State var submitted:Bool = false
     @State var typing:Bool = false
     @State var totalSecondsInDay = 24*60*60
-    @State var secondsRemaining = 0
     @State var dailyImage:UIImage
     @State var photoDateData : Date = Date()
     @State var photoLocationData : CLLocation = CLLocation()
@@ -24,11 +23,13 @@ struct DailyHomeView: View {
     @State var photoAdministrativeArea : String = "" //state or region
     @State var photoCountry : String = ""
     @State var waitForNext : Bool = false
+    @State var countDownTime : Int = 0
     static var date = Date()
     static var calendar = Calendar.current
     static var hours = calendar.component(.hour, from: date)
     static var minutes = calendar.component(.minute, from: date)
     static var seconds = calendar.component(.second, from: date)
+
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: RevealController.entity(),
@@ -46,7 +47,7 @@ struct DailyHomeView: View {
         Text("Flicsy").font(.title)
         ZStack {
             if ((revealed && submitted) || waitForNext) {
-                CountDownCard(timeRemaining: $totalSecondsInDay).opacity(1) // Replace with secondsRemaining when that works
+                CountDownCard(timeRemaining: $countDownTime).opacity(1) 
             } else if (!revealed) {
                 RevealCard().opacity(1).onTapGesture {
                     RevealCard().opacity(0)
@@ -62,6 +63,7 @@ struct DailyHomeView: View {
                     let date = Date()
                     let calendar = Calendar.current
                     let nextRevealTime = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)
+                    
                     
                     //FIRST use
                     if revealController.isEmpty {
@@ -113,6 +115,8 @@ struct DailyHomeView: View {
             Spacer(minLength: DailyFlicCard.spacerHeight)
         }.onAppear(perform: {
             revealed = getRevealed(results: revealController)
+            countDownTime = timeInSeconds()
+            
             if (revealed) {
                 waitForNext = true
             }
@@ -120,11 +124,12 @@ struct DailyHomeView: View {
     }
     
     //Convert the time into seconds
-    func timeInSeconds() {
+    func timeInSeconds() -> Int {
         let hoursInSeconds   = Int(DailyHomeView.hours) * 3600
         let minutesInSeconds = Int(DailyHomeView.minutes) * 60
         let secondsInSeconds = Int(DailyHomeView.seconds) * 1
-        secondsRemaining = totalSecondsInDay - (hoursInSeconds + minutesInSeconds + secondsInSeconds)
+        let secondsRemaining = totalSecondsInDay - (hoursInSeconds + minutesInSeconds + secondsInSeconds)
+        return secondsRemaining
     }
     
     func retrieveTodaysFlic() {
