@@ -128,32 +128,28 @@ struct HistoryReflectionCard:View {
             .shadow(color: .gray, radius: 10, x: 5, y: 5)
             .overlay(
                 VStack {
-                    if (title == "") {
-                        Text("Untitled Reflection").font(.largeTitle).padding()
+                    if (emotion != "") {
+                        HStack() {
+                            Image(emotion)
+                        }
+                    }
+                    if (title == "Untitled Reflection") {
+                        Text("Untitled Reflection").font(.largeTitle).padding().foregroundColor(Color("PrimaryColor"))
                     } else {
-                        Text(title).font(.largeTitle).padding()
+                        Text(title).font(.largeTitle).padding().foregroundColor(Color("PrimaryColor"))
 
                     }
-                    if (emotion == "") {
-                        Text("").frame(maxWidth: .infinity, alignment: .center).padding(.all).font(.title)
+                    if (reflection == "Write reflection...") {
+                        Text("").frame(maxWidth: .infinity, alignment: .center).padding().font(.title).foregroundColor(Color("PrimaryColor"))
                     } else {
-                        Text("Category").frame(maxWidth: .infinity, alignment: .leading).padding(.all).font(.title)
-                        VStack(alignment: .center) {
-                            Image(emotion)
-                        }.padding()
-                    }
-                    if (reflection == "") {
-                        Text("").frame(maxWidth: .infinity, alignment: .center).padding().font(.title)
-                    } else {
-                        Text("Your Reflection").frame(maxWidth: .infinity, alignment: .leading).padding().font(.title)
                         Text(reflection)
-                            .padding().font(.body)
+                            .padding().font(.body).foregroundColor(Color("PrimaryColor"))
                     }
                     Button(action: shareButton) {
                         Image(systemName: "square.and.arrow.up")
                                 .foregroundColor(.black)
                     }
-                }
+                }.frame(maxWidth:DailyFlicCard.width, maxHeight: DailyFlicCard.height)
             )
     }
 }
