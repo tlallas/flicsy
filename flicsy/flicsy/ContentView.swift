@@ -51,7 +51,7 @@ struct ContentView: View {
                         Text("History")
                     }
                 }.padding(.bottom, 5)
-            }
+             }
         }.background(Color("BackgroundColor"))
     }
 }

@@ -12,6 +12,7 @@ struct DailyHomeView: View {
     @Binding var tabSelection: Int
     @State var flipped:Bool = false
     @State var flip:Bool = false
+    @State var onDailyFlicCard:Bool = false
     @State var revealed:Bool = false
     @State var submitted:Bool = false
     @State var typing:Bool = false
@@ -36,18 +37,26 @@ struct DailyHomeView: View {
                   sortDescriptors: [])
     var revealController : FetchedResults<RevealController>
     
-    
-    
-
-
-    
     let ceo: CLGeocoder = CLGeocoder()
         
     var body: some View {
-        Text("flicsy")
-            .foregroundColor(Color("PrimaryColor"))
-            .font(.title)
-            .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
+        HStack {
+            Text("flicsy")
+                .foregroundColor(Color("PrimaryColor"))
+                .font(.title)
+                .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
+            HStack {
+                if (revealed && !submitted && onDailyFlicCard) {
+                    Image("TapArrow").resizable().frame(width: 30, height: 25)
+                    Text("Tap to reflect")
+                        .foregroundColor(Color("PrimaryColor"))
+                } else if(revealed && !submitted && !onDailyFlicCard) {
+                    Image("TapArrow").resizable().frame(width: 30, height: 25)
+                    Text("Tap for photo")
+                        .foregroundColor(Color("PrimaryColor"))
+                }
+            }.frame(maxWidth: DailyFlicCard.width - 20, alignment: .trailing)
+        }.frame(maxWidth: DailyFlicCard.width)
         ZStack {
             if ((revealed && submitted) || waitForNext) {
                 CountDownCard(timeRemaining: $countDownTime).opacity(1) 
@@ -55,6 +64,7 @@ struct DailyHomeView: View {
                 RevealCard().opacity(1).onTapGesture {
                     RevealCard().opacity(0)
                     retrieveTodaysFlic()
+                    onDailyFlicCard = true
                     DailyFlicCard(photoDateData: $photoDateData,
                                   photoLocationData: $photoLocationData,
                                   photoLocality: $photoLocality,
@@ -90,7 +100,9 @@ struct DailyHomeView: View {
                                photoAdministrativeArea: $photoAdministrativeArea,
                                photoCountry: $photoCountry).opacity(0)
             } else {
-                ReflectionCard(submitted: $submitted, typing: $typing, date: $photoDateData, dailyImage: $dailyImage, tabSelection: $tabSelection,
+                ReflectionCard(submitted: $submitted,
+                               typing: $typing, date: $photoDateData,
+                               dailyImage: $dailyImage, tabSelection: $tabSelection,
                                photoLocality: $photoLocality,
                                photoAdministrativeArea: $photoAdministrativeArea,
                                photoCountry: $photoCountry).opacity(flipped ? 0 : 1)
@@ -106,6 +118,11 @@ struct DailyHomeView: View {
         .modifier(FlipEffect(flipped: $flipped, angle: flip ? 0 : 180))
         .onTapGesture(count: 1, perform: {
             withAnimation {
+                if (onDailyFlicCard) {
+                    onDailyFlicCard = false
+                } else {
+                    onDailyFlicCard = true
+                }
                 if (!waitForNext && revealed && !submitted && !typing) {
                     flip.toggle()
                 }
@@ -191,7 +208,7 @@ struct RevealCard:View {
                 .shadow(color: .gray, radius: 5, x: 2, y: 2)
                 .overlay(
                     VStack {
-                        Text("Reveal")
+                        Text("Tap to Reveal")
                             .foregroundColor(Color("PrimaryColor"))
                             .font(.largeTitle)
                         Text("New photo available!")
