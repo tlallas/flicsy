@@ -131,7 +131,12 @@ struct HistoryReflectionCard:View {
                     if (emotion != "") {
                         HStack() {
                             Image(emotion)
-                        }
+                            Text(emotion).font(Font.system(size: 12))
+                        }.padding()
+                            .foregroundColor(Color("PrimaryColor"))
+                            .background(Color("AccentColor"))
+                            .cornerRadius(12)
+
                     }
                     if (title == "Untitled Reflection") {
                         Text("Untitled Reflection").font(.largeTitle).padding().foregroundColor(Color("PrimaryColor"))
