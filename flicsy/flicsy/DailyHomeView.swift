@@ -40,107 +40,113 @@ struct DailyHomeView: View {
     let ceo: CLGeocoder = CLGeocoder()
         
     var body: some View {
-        HStack {
-            Text("flicsy")
-                .foregroundColor(Color("PrimaryColor"))
-                .font(.title)
-                .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
-            HStack {
-                if (revealed && !submitted && onDailyFlicCard) {
-                    Image("TapArrow").resizable().frame(width: 30, height: 25)
-                    Text("Tap to reflect")
-                        .foregroundColor(Color("PrimaryColor"))
-                } else if(revealed && !submitted && !onDailyFlicCard) {
-                    Image("TapArrow").resizable().frame(width: 30, height: 25)
-                    Text("Tap for photo")
-                        .foregroundColor(Color("PrimaryColor"))
-                }
-            }.frame(maxWidth: DailyFlicCard.width - 20, alignment: .trailing)
-        }.frame(maxWidth: DailyFlicCard.width)
-        ZStack {
-            if ((revealed && submitted) || waitForNext) {
-                CountDownCard(timeRemaining: $countDownTime).opacity(1) 
-            } else if (!revealed) {
-                RevealCard().opacity(1).onTapGesture {
-                    RevealCard().opacity(0)
-                    retrieveTodaysFlic()
-                    onDailyFlicCard = true
-                    DailyFlicCard(photoDateData: $photoDateData,
-                                  photoLocationData: $photoLocationData,
-                                  photoLocality: $photoLocality,
-                                  photoAdministrativeArea: $photoAdministrativeArea,
-                                  photoCountry: $photoCountry,
-                                  dailyImage: $dailyImage).opacity(1)
-                    revealed = true
-                    
-                    let date = Date()
-                    let calendar = Calendar.current
-                    let nextRevealTime = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)
-                    
-                    
-                    //FIRST use
-                    if revealController.isEmpty {
-                        let controller = RevealController(context: managedObjectContext)
-                        controller.nextReveal = nextRevealTime
-                        PersistenceController.shared.save()
-                        
+        Color("BackgroundColor")
+            .edgesIgnoringSafeArea(.all)
+            .overlay(
+                VStack {
+                    HStack {
+                        Text("flicsy")
+                            .foregroundColor(Color("PrimaryColor"))
+                            .font(.title)
+                            .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
+                        HStack {
+                            if (revealed && !submitted && onDailyFlicCard && (countDownTime == 0)) {
+                                Image("TapArrow").resizable().frame(width: 30, height: 25)
+                                Text("Tap to reflect")
+                                    .foregroundColor(Color("PrimaryColor"))
+                            } else if(revealed && !submitted && !onDailyFlicCard && (countDownTime == 0)) {
+                                Image("TapArrow").resizable().frame(width: 30, height: 25)
+                                Text("Tap for photo")
+                                    .foregroundColor(Color("PrimaryColor"))
+                            }
+                        }.frame(maxWidth: DailyFlicCard.width - 20, alignment: .trailing)
+                    }.frame(maxWidth: DailyFlicCard.width)
+                    ZStack {
+                        if ((revealed && submitted) || waitForNext) {
+                            CountDownCard(timeRemaining: $countDownTime).opacity(1)
+                        } else if (!revealed) {
+                            RevealCard().opacity(1).onTapGesture {
+                                RevealCard().opacity(0)
+                                retrieveTodaysFlic()
+                                onDailyFlicCard = true
+                                DailyFlicCard(photoDateData: $photoDateData,
+                                              photoLocationData: $photoLocationData,
+                                              photoLocality: $photoLocality,
+                                              photoAdministrativeArea: $photoAdministrativeArea,
+                                              photoCountry: $photoCountry,
+                                              dailyImage: $dailyImage).opacity(1)
+                                revealed = true
+                                
+                                let date = Date()
+                                let calendar = Calendar.current
+                                let nextRevealTime = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)
+                                
+                                
+                                //FIRST use
+                                if revealController.isEmpty {
+                                    let controller = RevealController(context: managedObjectContext)
+                                    controller.nextReveal = nextRevealTime
+                                    PersistenceController.shared.save()
+                                    
+                                }
+                                
+                                //UPDATE existing revealController
+                                for controller in revealController {
+                                    controller.nextReveal = nextRevealTime
+                                    PersistenceController.shared.save()
+                                }
+                             
+                                
+                            }
+                        } else if (submitted) {
+                            ReflectionCard(submitted: $submitted, typing: $typing, date: $photoDateData, dailyImage: $dailyImage, tabSelection: $tabSelection,
+                                           photoLocality: $photoLocality,
+                                           photoAdministrativeArea: $photoAdministrativeArea,
+                                           photoCountry: $photoCountry).opacity(0)
+                        } else {
+                            ReflectionCard(submitted: $submitted,
+                                           typing: $typing, date: $photoDateData,
+                                           dailyImage: $dailyImage, tabSelection: $tabSelection,
+                                           photoLocality: $photoLocality,
+                                           photoAdministrativeArea: $photoAdministrativeArea,
+                                           photoCountry: $photoCountry).opacity(flipped ? 0 : 1)
+                            
+                            DailyFlicCard(photoDateData: $photoDateData,
+                                          photoLocationData: $photoLocationData,
+                                          photoLocality: $photoLocality,
+                                          photoAdministrativeArea: $photoAdministrativeArea,
+                                          photoCountry: $photoCountry,
+                                          dailyImage: $dailyImage).opacity(flipped ? 1 : 0)
+                        }
                     }
-                    
-                    //UPDATE existing revealController
-                    for controller in revealController {
-                        controller.nextReveal = nextRevealTime
-                        PersistenceController.shared.save()
-                    }
-                 
-                    
+                    .modifier(FlipEffect(flipped: $flipped, angle: flip ? 0 : 180))
+                    .onTapGesture(count: 1, perform: {
+                        withAnimation {
+                            if (onDailyFlicCard) {
+                                onDailyFlicCard = false
+                            } else {
+                                onDailyFlicCard = true
+                            }
+                            if (!waitForNext && revealed && !submitted && !typing) {
+                                flip.toggle()
+                            }
+                            if (typing) {
+                                typing = false
+                            }
+                        }
+                    })
+                    VStack {
+                        // Spacer(minLength: DailyFlicCard.spacerHeight)
+                    }.onAppear(perform: {
+                        revealed = getRevealed(results: revealController)
+                        countDownTime = timeInSeconds()
+                        print("COOL")
+                        if (revealed) {
+                            waitForNext = true
+                        }
+                    })
                 }
-            } else if (submitted) {
-                ReflectionCard(submitted: $submitted, typing: $typing, date: $photoDateData, dailyImage: $dailyImage, tabSelection: $tabSelection,
-                               photoLocality: $photoLocality,
-                               photoAdministrativeArea: $photoAdministrativeArea,
-                               photoCountry: $photoCountry).opacity(0)
-            } else {
-                ReflectionCard(submitted: $submitted,
-                               typing: $typing, date: $photoDateData,
-                               dailyImage: $dailyImage, tabSelection: $tabSelection,
-                               photoLocality: $photoLocality,
-                               photoAdministrativeArea: $photoAdministrativeArea,
-                               photoCountry: $photoCountry).opacity(flipped ? 0 : 1)
-                
-                DailyFlicCard(photoDateData: $photoDateData,
-                              photoLocationData: $photoLocationData,
-                              photoLocality: $photoLocality,
-                              photoAdministrativeArea: $photoAdministrativeArea,
-                              photoCountry: $photoCountry,
-                              dailyImage: $dailyImage).opacity(flipped ? 1 : 0)
-            }
-        }
-        .modifier(FlipEffect(flipped: $flipped, angle: flip ? 0 : 180))
-        .onTapGesture(count: 1, perform: {
-            withAnimation {
-                if (onDailyFlicCard) {
-                    onDailyFlicCard = false
-                } else {
-                    onDailyFlicCard = true
-                }
-                if (!waitForNext && revealed && !submitted && !typing) {
-                    flip.toggle()
-                }
-                if (typing) {
-                    typing = false
-                }
-            }
-        })
-        VStack {
-            Spacer(minLength: DailyFlicCard.spacerHeight)
-        }.onAppear(perform: {
-            revealed = getRevealed(results: revealController)
-            countDownTime = timeInSeconds()
-            
-            if (revealed) {
-                waitForNext = true
-            }
-        })
+            )
     }
     
     //Convert the time into seconds
@@ -416,7 +422,6 @@ struct CountDownCard:View {
             .resizable()
             .cornerRadius(10)
             .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
-            .shadow(color: .gray, radius: 5, x: 2, y: 2)
             .overlay(
                 VStack {
                     Text("Next reveal in...")

@@ -14,45 +14,49 @@ struct ContentView: View {
    
     @FetchRequest(entity: User.entity(),sortDescriptors:[])
     var user: FetchedResults<User>
+    init() {
+            UITabBar.appearance().backgroundColor = UIColor(Color("BackgroundColor"))
+        }
     
     var body: some View {
-        
-        VStack() {
-            if user.count == 0 {
-                OnboardingView()
-            }
-            else if user[0].isNewUser == true {
-                OnboardingView()
-            } else {
-                TabView (selection: $tabSelection) {
-                    NavigationView {
-                        VStack{
-                            DailyHomeView(tabSelection: $tabSelection, dailyImage: UIImage())
+        Color("BackgroundColor")
+            .edgesIgnoringSafeArea(.all)
+            .overlay(
+            VStack() {
+                if user.count == 0 {
+                    OnboardingView()
+                }
+                else if user[0].isNewUser == true {
+                    OnboardingView()
+                } else {
+                    TabView (selection: $tabSelection) {
+                        NavigationView {
+                            VStack{
+                                DailyHomeView(tabSelection: $tabSelection, dailyImage: UIImage())
 
-                            Spacer()
+                                Spacer()
+                            }
                         }
-                    }
-                    .tag(0)
-                    .tabItem {
-                        Image(systemName: "house")
-                            .resizable()
-                        Text("Today's Flic")
-                    }
+                        .tag(0)
+                        .tabItem {
+                            Image(systemName: "house")
+                                .resizable()
+                        }.background(Color("BackgroundColor"))
 
-                    NavigationView {
-                        VStack {
-                            HistoryView()
-                            Spacer()
+                        NavigationView {
+                            VStack {
+                                HistoryView()
+                                Spacer()
+                            }
                         }
-                    }
-                    .tag(1)
-                    .tabItem {
-                        Image(systemName: "clock")
-                        Text("History")
-                    }
-                }.padding(.bottom, 5)
-             }
-        }.background(Color("BackgroundColor"))
+                        .tag(1)
+                        .tabItem {
+                            Image(systemName: "square.stack.fill")
+                        }.background(Color("BackgroundColor"))
+                    }.padding(.bottom, 5)
+                 }
+            }.background(Color("BackgroundColor"))
+        )
     }
 }
 

@@ -16,26 +16,31 @@ struct HistoryCardView: View {
     @State var flip:Bool = false
                 
     var body: some View {
-        Text("History").font(.title).foregroundColor(Color("PrimaryColor"))
-        ZStack {
-            HistoryReflectionCard(title: $title,
-                                  reflection: $reflection,
-                                  emotion: $emotion,dailyImage: $dailyImage).opacity(flipped ? 0 : 1)
-            HistoryFlicCard(date: $date,
-                          locality: $locality,
-                          region: $region,
-                          country: $country,
-                          dailyImage: $dailyImage).opacity(flipped ? 1 : 0)
-        }
-        .modifier(FlipEffect(flipped: $flipped, angle: flip ? 0 : 180))
-        .onTapGesture(count: 1, perform: {
-            withAnimation {
-                flip.toggle()
-            }
-        })
-        VStack {
-            Spacer(minLength: DailyFlicCard.spacerHeight)
-        }
+        Color("BackgroundColor")
+            .edgesIgnoringSafeArea(.all)
+            .overlay(
+                VStack {
+                    Text("History").font(.title).foregroundColor(Color("PrimaryColor"))
+                    ZStack {
+                        HistoryReflectionCard(title: $title,
+                                              reflection: $reflection,
+                                              emotion: $emotion,dailyImage: $dailyImage).opacity(flipped ? 0 : 1)
+                        HistoryFlicCard(date: $date,
+                                      locality: $locality,
+                                      region: $region,
+                                      country: $country,
+                                      dailyImage: $dailyImage).opacity(flipped ? 1 : 0)
+                    }
+                    .modifier(FlipEffect(flipped: $flipped, angle: flip ? 0 : 180))
+                    .onTapGesture(count: 1, perform: {
+                        withAnimation {
+                            flip.toggle()
+                        }
+                    })
+                    VStack {
+                        Spacer(minLength: DailyFlicCard.spacerHeight)
+                    }
+            })
     }
 }
 
@@ -125,7 +130,6 @@ struct HistoryReflectionCard:View {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color("PrimaryColor"))
             .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
-            .shadow(color: .gray, radius: 10, x: 5, y: 5)
             .overlay(
                 VStack {
                     if (emotion != "") {
