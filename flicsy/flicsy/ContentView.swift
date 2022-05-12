@@ -31,8 +31,6 @@ struct ContentView: View {
                         NavigationView {
                             VStack{
                                 DailyHomeView(tabSelection: $tabSelection, dailyImage: UIImage())
-
-                                Spacer()
                             }
                         }
                         .tag(0)
@@ -45,7 +43,6 @@ struct ContentView: View {
                         NavigationView {
                             VStack {
                                 HistoryView()
-                                Spacer()
                             }
                         }
                         .tag(1)
