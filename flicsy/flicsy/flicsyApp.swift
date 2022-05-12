@@ -18,12 +18,7 @@ struct flicsyApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistentController.container.viewContext)
-                .onAppear(perform: {
-                    let users = User(context: persistentController.container.viewContext)
-                            users.isNewUser = true
-                    PersistenceController.shared.save()
-                    
-                })
+           
         }
         .onChange(of: scenePhase) { (newScenePhase) in
             switch newScenePhase {

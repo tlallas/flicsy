@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>In order to give you a daily photo suprise from your camera roll, Flicsy needs access to your photos.</string>
 </dict>
 </plist>
