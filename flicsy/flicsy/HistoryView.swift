@@ -62,7 +62,7 @@ struct HistoryView: View {
                                             .foregroundColor(Color("PrimaryColor"))
                                         
                                     }.padding([.leading, .trailing])
-                                        .background(Color("AccentColor"))
+                                        .background(Color("BabyBlueColor"))
                                         .cornerRadius(30)
                                 }
                             }

@@ -138,7 +138,7 @@ struct HistoryReflectionCard:View {
                             Text(emotion).font(Font.system(size: 12))
                         }.padding()
                             .foregroundColor(Color.white)
-                            .frame(maxWidth: DailyFlicCard.width, maxHeight: (DailyFlicCard.width * 0.09), alignment: .top)
+                            .frame(maxWidth: DailyFlicCard.width, maxHeight: (DailyFlicCard.width * 0.20), alignment: .top)
                             .background(Color("HeaderColor"))
                             .cornerRadius(10)
                     } else {

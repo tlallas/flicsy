@@ -136,11 +136,12 @@ struct DailyHomeView: View {
                         }
                     })
                     VStack {
-                        // Spacer(minLength: DailyFlicCard.spacerHeight)
+                        if (!revealed || !submitted || (countDownTime == 0)) {
+                            Spacer(minLength: DailyFlicCard.spacerHeight)
+                        }
                     }.onAppear(perform: {
                         revealed = getRevealed(results: revealController)
                         countDownTime = timeInSeconds()
-                        print("COOL")
                         if (revealed) {
                             waitForNext = true
                         }
@@ -211,7 +212,6 @@ struct RevealCard:View {
                 .resizable()
                 .cornerRadius(10)
                 .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
-                .shadow(color: .gray, radius: 5, x: 2, y: 2)
                 .overlay(
                     VStack {
                         Text("Tap to Reveal")
@@ -222,7 +222,7 @@ struct RevealCard:View {
                                     .foregroundColor(Color("PrimaryColor"))
                         }
                 )
-        }.cornerRadius(10).shadow(color: .gray, radius: 5, x: 2, y: 2)
+        }.cornerRadius(10)
     }
 }
 
@@ -247,7 +247,7 @@ struct DailyFlicCard:View {
                 .fill(Color(.white))
                 .aspectRatio(9/16, contentMode: .fit)
             Image(uiImage: dailyImage).resizable().aspectRatio(contentMode: .fill)
-                .layoutPriority(-1).cornerRadius(10).shadow(color: .gray, radius: 5, x: 2, y: 2)
+                .layoutPriority(-1).cornerRadius(10)
             ZStack {
                 Rectangle().fill(Color(.black)).frame(width: DailyFlicCard.width, height: 100, alignment: .bottom).opacity(0.3)
                 VStack {
@@ -313,7 +313,6 @@ struct ReflectionCard:View {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color.white)
             .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
-            .shadow(color: .gray, radius: 10, x: 5, y: 5)
             .overlay(
                 VStack {
                     TextEditor(text: $title)
@@ -426,7 +425,7 @@ struct CountDownCard:View {
                 VStack {
                     Text("Next reveal in...")
                         .foregroundColor(Color("PrimaryColor"))
-                        .font(.largeTitle)
+                        .font(.title)
                     Text("\(timeString(time: timeRemaining))")
                                 .font(.system(size: 60))
                                 .frame(height: 80.0)

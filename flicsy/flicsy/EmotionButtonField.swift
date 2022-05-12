@@ -75,7 +75,7 @@ struct EmotionButtonField: View {
                 Spacer()
             }.padding()
             .foregroundColor(self.color)
-            .background(self.isMarked ? Color("AccentColor") : Color.white)
+            .background(self.isMarked ? Color("BabyBlueColor") : Color.white)
             .cornerRadius(12)
                
         }
