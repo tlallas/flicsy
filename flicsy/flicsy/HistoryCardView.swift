@@ -16,7 +16,7 @@ struct HistoryCardView: View {
     @State var flip:Bool = false
                 
     var body: some View {
-        Text("History").font(.title)
+        Text("History").font(.title).foregroundColor(Color("PrimaryColor"))
         ZStack {
             HistoryReflectionCard(title: $title,
                                   reflection: $reflection,
@@ -123,37 +123,40 @@ struct HistoryReflectionCard:View {
 
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
-            .fill(Color.white)
+            .fill(Color("PrimaryColor"))
             .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
             .shadow(color: .gray, radius: 10, x: 5, y: 5)
             .overlay(
                 VStack {
                     if (emotion != "") {
-                        HStack() {
+                        VStack() {
                             Image(emotion)
                             Text(emotion).font(Font.system(size: 12))
                         }.padding()
-                            .foregroundColor(Color("PrimaryColor"))
-                            .background(Color("AccentColor"))
-                            .cornerRadius(12)
-
+                            .foregroundColor(Color.white)
+                            .frame(maxWidth: DailyFlicCard.width, maxHeight: (DailyFlicCard.width * 0.09), alignment: .top)
+                            .background(Color("HeaderColor"))
+                            .cornerRadius(10)
+                    } else {
+                        Spacer()
                     }
                     if (title == "Untitled Reflection") {
-                        Text("Untitled Reflection").font(.largeTitle).padding().foregroundColor(Color("PrimaryColor"))
+                        Text("Untitled Reflection").font(.largeTitle).padding().foregroundColor(Color.white)
                     } else {
-                        Text(title).font(.largeTitle).padding().foregroundColor(Color("PrimaryColor"))
-
+                        Text(title).font(.largeTitle).padding().foregroundColor(Color.white)
                     }
                     if (reflection == "Write reflection...") {
                         Text("").frame(maxWidth: .infinity, alignment: .center).padding().font(.title).foregroundColor(Color("PrimaryColor"))
                     } else {
                         Text(reflection)
-                            .padding().font(.body).foregroundColor(Color("PrimaryColor"))
+                            .padding().font(.body).foregroundColor(Color.white)
+                        Spacer()
                     }
-                    Button(action: shareButton) {
-                        Image(systemName: "square.and.arrow.up")
-                                .foregroundColor(.black)
-                    }
+                    Spacer()
+                    Button("Share", action: shareButton)
+                        .foregroundColor(Color.white)
+                        .font(.title2)
+                    Spacer()
                 }.frame(maxWidth:DailyFlicCard.width, maxHeight: DailyFlicCard.height)
             )
     }
