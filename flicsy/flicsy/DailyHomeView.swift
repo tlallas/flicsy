@@ -208,21 +208,20 @@ struct DailyHomeView: View {
 struct RevealCard:View {
     var body:some View {
         ZStack {
-            Image("RevealBackground")
-                .resizable()
-                .cornerRadius(10)
-                .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
-                .overlay(
-                    VStack {
-                        Text("Tap to Reveal")
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color(.white))
+                .aspectRatio(9/16, contentMode: .fit)
+            Image(uiImage: UIImage(named: "RevealBackground")!).resizable().aspectRatio(contentMode: .fill)
+                .layoutPriority(-1).cornerRadius(10)
+            VStack {
+                Text("Tap to Reveal")
+                    .foregroundColor(Color("PrimaryColor"))
+                    .font(.largeTitle)
+                Text("New photo available!")
+                            .font(.subheadline)
                             .foregroundColor(Color("PrimaryColor"))
-                            .font(.largeTitle)
-                        Text("New photo available!")
-                                    .font(.subheadline)
-                                    .foregroundColor(Color("PrimaryColor"))
-                        }
-                )
-        }.cornerRadius(10)
+            }.frame(maxWidth: DailyFlicCard.width, maxHeight: DailyFlicCard.height, alignment: .center)
+        }.clipped().cornerRadius(10).frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
     }
 }
 
@@ -417,29 +416,30 @@ struct CountDownCard:View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body:some View {
-        return Image("CountdownBackground")
-            .resizable()
-            .cornerRadius(10)
-            .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
-            .overlay(
-                VStack {
-                    Text("Next reveal in...")
-                        .foregroundColor(Color("PrimaryColor"))
-                        .font(.title)
-                    Text("\(timeString(time: timeRemaining))")
-                                .font(.system(size: 60))
-                                .frame(height: 80.0)
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                                .foregroundColor(Color("PrimaryColor"))
-                                .onReceive(timer){ _ in
-                                    if self.timeRemaining > 0 {
-                                        self.timeRemaining -= 1
-                                    }else{
-                                        self.timer.upstream.connect().cancel()
-                                    }
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color(.white))
+                .aspectRatio(9/16, contentMode: .fit)
+            Image(uiImage: UIImage(named: "CountdownBackground")!).resizable().aspectRatio(contentMode: .fill)
+                .layoutPriority(-1).cornerRadius(10)
+            VStack {
+                Text("Next reveal in...")
+                    .foregroundColor(Color("PrimaryColor"))
+                    .font(.title)
+                Text("\(timeString(time: timeRemaining))")
+                            .font(.system(size: 60))
+                            .frame(height: 80.0)
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .foregroundColor(Color("PrimaryColor"))
+                            .onReceive(timer){ _ in
+                                if self.timeRemaining > 0 {
+                                    self.timeRemaining -= 1
+                                }else{
+                                    self.timer.upstream.connect().cancel()
                                 }
-                    }.navigationBarHidden(true)
-            )
+                            }
+            }.frame(maxWidth: DailyFlicCard.width, maxHeight: DailyFlicCard.height, alignment: .center).navigationBarHidden(true)
+        }.clipped().cornerRadius(10).frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
     }
     
     //Convert the time into 24hr (24:00:00) format
