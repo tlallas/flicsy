@@ -10,8 +10,10 @@ import PhotosUI
 
 struct OnboardingView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
+    let persistentController = PersistenceController.shared
     @FetchRequest(entity: User.entity(),sortDescriptors:[])
     var user: FetchedResults<User>
+    @Binding var inOnboarding : Bool
     
     var titles = ["welcome to", "", "",""]
     
@@ -27,6 +29,7 @@ struct OnboardingView: View {
         ZStack { // 1
             Color("BackgroundColor").ignoresSafeArea() // 2
             Image("onboardingEllipse").padding(.top, -260).ignoresSafeArea()
+            
         VStack(alignment: .center) {
             Group {
                 if self.currentPageIndex == 0 {
@@ -46,6 +49,10 @@ struct OnboardingView: View {
                         .resizable()
                         .frame(width: 320, height: 277)
                         .padding(.top, 65)
+                } else if self.currentPageIndex == 3 {
+                    Image("flicHistory")
+                        .resizable()
+                        .frame(width: 185, height: 340)
                 }
 
 
@@ -79,8 +86,10 @@ struct OnboardingView: View {
                 }
                 Button(action: {
                     if self.currentPageIndex+1 == self.titles.count {
-                        user[0].isNewUser = false
+                        let newUser = User(context: persistentController.container.viewContext)
+                        newUser.isNewUser = false
                         PersistenceController.shared.save()
+                        inOnboarding = false
                     }
                     else if self.currentPageIndex == 2{
                     retrieveTodaysFlic()
@@ -172,10 +181,4 @@ struct ButtonFinishContent: View {
     }
 }
 
-#if DEBUG
-struct OnboardingView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingView()
-    }
-}
-#endif
+
