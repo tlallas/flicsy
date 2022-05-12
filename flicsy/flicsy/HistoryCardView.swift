@@ -20,7 +20,6 @@ struct HistoryCardView: View {
             .edgesIgnoringSafeArea(.all)
             .overlay(
                 VStack {
-                    Text("History").font(.title).foregroundColor(Color("PrimaryColor"))
                     ZStack {
                         HistoryReflectionCard(title: $title,
                                               reflection: $reflection,
@@ -36,10 +35,10 @@ struct HistoryCardView: View {
                         withAnimation {
                             flip.toggle()
                         }
-                    })
-                    VStack {
-                        Spacer(minLength: DailyFlicCard.spacerHeight)
-                    }
+                    }).navigationBarTitleDisplayMode(.inline)
+                        .navigationTitle("History")
+                        
+                        
             })
     }
 }
