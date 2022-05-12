@@ -65,7 +65,7 @@ struct HistoryFlicCard:View {
                 .aspectRatio(9/16, contentMode: .fit)
             if let img = UIImage(data:dailyImage){
                 Image(uiImage:img).resizable().aspectRatio(contentMode: .fill)
-                    .layoutPriority(-1).cornerRadius(10).shadow(color: .gray, radius: 5, x: 2, y: 2)
+                    .layoutPriority(-1).cornerRadius(10)
             }
             ZStack {
                 Rectangle().fill(Color(.black)).frame(width: DailyFlicCard.width, height: 100, alignment: .bottom).opacity(0.3)
@@ -109,7 +109,7 @@ struct HistoryFlicCard:View {
                     }
                 }
             }.frame(maxHeight: DailyFlicCard.height, alignment: .bottom)
-        }.clipped().cornerRadius(10)
+        }.clipped().cornerRadius(10).frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
     }
 }
 
