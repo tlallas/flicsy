@@ -33,7 +33,8 @@ struct HistoryView: View {
                             locality:reflection.locality ?? "",
                             date:reflection.date ?? Date(),
                             country:reflection.country ?? "",
-                            region: reflection.administrativeArea ?? "")) {
+                            region: reflection.administrativeArea ?? ""))
+                        {
                         
                             HStack{
                              if let thumbnailImage = UIImage(data: reflection.thumbnail!){
@@ -70,7 +71,9 @@ struct HistoryView: View {
                         }
                     }
                 }
-            }
+                }.navigationTitle("Flic History")
+                   
+
             
         }
     

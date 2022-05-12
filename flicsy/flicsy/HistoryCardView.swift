@@ -14,6 +14,8 @@ struct HistoryCardView: View {
     @State var region:String
     @State var flipped:Bool = false
     @State var flip:Bool = false
+    
+
                 
     var body: some View {
         Color("BackgroundColor")
@@ -36,9 +38,9 @@ struct HistoryCardView: View {
                             flip.toggle()
                         }
                     }).navigationBarTitleDisplayMode(.inline)
-                        .navigationTitle("History")
-                        
-                        
+                        .navigationTitle("")
+                  
+                      
             })
     }
 }
