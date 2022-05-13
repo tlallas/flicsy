@@ -11,6 +11,7 @@
 		951C644328282FDE001234F8 /* EmotionButtonField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C644228282FDE001234F8 /* EmotionButtonField.swift */; };
 		951C64452828665A001234F8 /* DailyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C64442828665A001234F8 /* DailyHomeView.swift */; };
 		951C6447282A0072001234F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C6446282A0072001234F8 /* SceneDelegate.swift */; };
+		9573C408282E0D9800779277 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9573C407282E0D9800779277 /* GoogleService-Info.plist */; };
 		95A9E9D1281C27F800AEA6FA /* FlicsyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95A9E9CF281C27F800AEA6FA /* FlicsyModel.xcdatamodeld */; };
 		95D9C2B0281C2A7300982FD2 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9C2AF281C2A7300982FD2 /* PersistenceController.swift */; };
 		95DBF850281488CE00662815 /* flicsyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBF84F281488CE00662815 /* flicsyApp.swift */; };
@@ -51,6 +52,7 @@
 		951C64442828665A001234F8 /* DailyHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHomeView.swift; sourceTree = "<group>"; };
 		951C6446282A0072001234F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ../SceneDelegate.swift; sourceTree = "<group>"; };
 		951F132F28149343004F46BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9573C407282E0D9800779277 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		95A9E9D0281C27F800AEA6FA /* FlicsyModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlicsyModel.xcdatamodel; sourceTree = "<group>"; };
 		95D9C2AF281C2A7300982FD2 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		95DBF84C281488CE00662815 /* flicsy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flicsy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +121,7 @@
 		95DBF84E281488CE00662815 /* flicsy */ = {
 			isa = PBXGroup;
 			children = (
+				9573C407282E0D9800779277 /* GoogleService-Info.plist */,
 				951F132F28149343004F46BB /* Info.plist */,
 				D252DE9B28287A8A005A6964 /* OnboardingView.swift */,
 				951C6446282A0072001234F8 /* SceneDelegate.swift */,
@@ -269,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95DBF857281488D000662815 /* Preview Assets.xcassets in Resources */,
+				9573C408282E0D9800779277 /* GoogleService-Info.plist in Resources */,
 				D252DEAD28287AE3005A6964 /* LaunchScreen.storyboard in Resources */,
 				95DBF854281488D000662815 /* Assets.xcassets in Resources */,
 			);

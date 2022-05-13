@@ -8,16 +8,20 @@
 import SwiftUI
 import UIKit
 import PhotosUI
+import Foundation
 
 @main
 struct flicsyApp: App {
     let persistentController = PersistenceController.shared
     @Environment(\.scenePhase) var scenePhase
+//    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate NOT IN USE
+
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistentController.container.viewContext)
+               
            
         }
         .onChange(of: scenePhase) { (newScenePhase) in
@@ -36,3 +40,35 @@ struct flicsyApp: App {
     }
 
 }
+
+
+//DOES NOT WORK
+////create a class to use as your app's delegate
+//class AppDelegate: NSObject, UIApplicationDelegate {
+//    @Environment(\.managedObjectContext) var managedObjectContext
+//    @FetchRequest(entity: RevealController.entity(),
+//                  sortDescriptors: [])
+//    var revealController : FetchedResults<RevealController>
+//
+//    func applicationDidFinishLaunching(_ aNotification: Notification) {
+//        // Insert code here to initialize your application
+//    }
+//
+//    func applicationWillTerminate(_ aNotification: Notification) {
+//        // Insert code here to tear down your application
+//        //FIRST use
+//        if revealController.isEmpty {
+//            let controller = RevealController(context: managedObjectContext)
+//            controller.submitted = Date()
+//            PersistenceController.shared.save()
+//        }
+//        //UPDATE existing revealController
+//        for controller in revealController {
+//            controller.submitted = Date()
+//            PersistenceController.shared.save()
+//        }
+//
+//    }
+//
+//    //...add any other NSApplicationDelegate methods you need to use
+//}

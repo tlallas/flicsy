@@ -23,7 +23,6 @@ struct DailyHomeView: View {
     @State var photoLocality : String = "" //city
     @State var photoAdministrativeArea : String = "" //state or region
     @State var photoCountry : String = ""
-    @State var waitForNext : Bool = false
     @State var countDownTime : Int = 0
     static var date = Date()
     static var calendar = Calendar.current
@@ -123,7 +122,7 @@ struct DailyHomeView: View {
                             } else {
                                 onDailyFlicCard = true
                             }
-                            if (!waitForNext && revealed && !submitted && !typing) {
+                            if (revealed && !submitted && !typing) {
                                 flip.toggle()
                             } else if (revealed && !submitted){
                                 flip.toggle()
@@ -141,9 +140,6 @@ struct DailyHomeView: View {
                         revealed = getRevealed(results: revealController)
                         submitted = getSubmitted(results: revealController)
                         countDownTime = timeInSeconds()
-                        if (revealed && submitted) {
-                            waitForNext = true
-                        }
                     })
                 }
             )
@@ -336,7 +332,7 @@ struct ReflectionCard:View {
                         .frame(width: (DailyFlicCard.width * 0.85), height: (DailyFlicCard.height * 0.23), alignment: .center)
                         .multilineTextAlignment(.leading)
                         .opacity((reflectionText == "Write reflection...") ? 0.90 : 1)
-                        .background(Color("BackgroudnColor"))
+                        .background(Color("BackgroundColor"))
                         .foregroundColor((reflectionText == "Write reflection...") ? .gray : Color("PrimaryColor"))
                         .lineLimit(100).onAppear {
                             // put back the placeholder text if the user dismisses the keyboard without adding any text
