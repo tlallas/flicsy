@@ -49,11 +49,11 @@ struct DailyHomeView: View {
                             .font(.title)
                             .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
                         HStack {
-                            if (revealed && !submitted && onDailyFlicCard && (countDownTime == 0)) {
+                            if (revealed && !submitted && onDailyFlicCard) {
                                 Image("TapArrow").resizable().frame(width: 30, height: 25)
                                 Text("Tap to reflect")
                                     .foregroundColor(Color("PrimaryColor"))
-                            } else if(revealed && !submitted && !onDailyFlicCard && (countDownTime == 0)) {
+                            } else if(revealed && !submitted && !onDailyFlicCard) {
                                 Image("TapArrow").resizable().frame(width: 30, height: 25)
                                 Text("Tap for photo")
                                     .foregroundColor(Color("PrimaryColor"))
