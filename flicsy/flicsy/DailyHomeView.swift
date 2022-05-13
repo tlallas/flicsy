@@ -76,7 +76,7 @@ struct DailyHomeView: View {
                                           photoCountry: $photoCountry,
                                           dailyImage: $dailyImage).opacity(flipped ? 1 : 0)
                             
-                        } else if ((revealed && submitted) || waitForNext) {
+                        } else if (revealed && submitted) {
                             CountDownCard(timeRemaining: $countDownTime).opacity(1)
                         } else if (!revealed) {
                             RevealCard().opacity(1).onTapGesture {
@@ -112,25 +112,7 @@ struct DailyHomeView: View {
                              
                                 
                             }
-                        } else if (submitted) {
-                            ReflectionCard(submitted: $submitted, typing: $typing, date: $photoDateData, dailyImage: $dailyImage, tabSelection: $tabSelection,
-                                           photoLocality: $photoLocality,
-                                           photoAdministrativeArea: $photoAdministrativeArea,
-                                           photoCountry: $photoCountry, revealController: revealController).opacity(0)
-                        } else {
-                            ReflectionCard(submitted: $submitted,
-                                           typing: $typing, date: $photoDateData,
-                                           dailyImage: $dailyImage, tabSelection: $tabSelection,
-                                           photoLocality: $photoLocality,
-                                           photoAdministrativeArea: $photoAdministrativeArea,
-                                           photoCountry: $photoCountry, revealController: revealController).opacity(flipped ? 0 : 1)
-                            
-                            DailyFlicCard(photoDateData: $photoDateData,
-                                          photoLocationData: $photoLocationData,
-                                          photoLocality: $photoLocality,
-                                          photoAdministrativeArea: $photoAdministrativeArea,
-                                          photoCountry: $photoCountry,
-                                          dailyImage: $dailyImage).opacity(flipped ? 1 : 0)
+                        
                         }
                     }
                     .modifier(FlipEffect(flipped: $flipped, angle: flip ? 0 : 180))
@@ -159,7 +141,7 @@ struct DailyHomeView: View {
                         revealed = getRevealed(results: revealController)
                         submitted = getSubmitted(results: revealController)
                         countDownTime = timeInSeconds()
-                        if (revealed) {
+                        if (revealed && submitted) {
                             waitForNext = true
                         }
                     })
@@ -374,7 +356,7 @@ struct ReflectionCard:View {
                     HStack {
                         Button {
                             submit()
-                            setSubmittedTrue(revealController: revealController)
+                            setSubmitted(revealController: revealController)
                         } label : {
                             Text("Save to History")
                                 .foregroundColor(.white)
@@ -414,32 +396,17 @@ struct ReflectionCard:View {
     }
 }
 
-func setSubmittedFalse(revealController: FetchedResults<RevealController>) {
+func setSubmitted(revealController: FetchedResults<RevealController>) {
     @Environment(\.managedObjectContext) var managedObjectContext
     //FIRST use
     if revealController.isEmpty {
         let controller = RevealController(context: managedObjectContext)
-        controller.submitted = false
+        controller.submitted = Date()
         PersistenceController.shared.save()
     }
     //UPDATE existing revealController
     for controller in revealController {
-        controller.submitted = false
-        PersistenceController.shared.save()
-    }
-}
-
-func setSubmittedTrue(revealController: FetchedResults<RevealController>) {
-    @Environment(\.managedObjectContext) var managedObjectContext
-    //FIRST use
-    if revealController.isEmpty {
-        let controller = RevealController(context: managedObjectContext)
-        controller.submitted = true
-        PersistenceController.shared.save()
-    }
-    //UPDATE existing revealController
-    for controller in revealController {
-        controller.submitted = true
+        controller.submitted = Date()
         PersistenceController.shared.save()
     }
 }
@@ -555,8 +522,6 @@ func getRevealed(results: FetchedResults<RevealController>) -> Bool {
     if (!results.isEmpty) {
         for result in results {
             if let next = result.nextReveal {
-                print(next)
-                print(currDate)
                 if (currDate > next) {
                     return false;
                 } else {
@@ -571,9 +536,14 @@ func getRevealed(results: FetchedResults<RevealController>) -> Bool {
 func getSubmitted(results: FetchedResults<RevealController>) -> Bool {
     if (!results.isEmpty) {
         for result in results {
-            let submitted = result.submitted
-            return submitted
+            if let last = result.submitted {
+                if Calendar.current.isDateInToday(last) {
+                    return true
+                } else {
+                    return false
+                }
+            }
         }
     }
-    return false
+    return false;
 }

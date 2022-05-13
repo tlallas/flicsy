@@ -14,7 +14,7 @@
     </entity>
     <entity name="RevealController" representedClassName="RevealController" syncable="YES" codeGenerationType="class">
         <attribute name="nextReveal" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="submitted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="submitted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
         <attribute name="isNewUser" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
