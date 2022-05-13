@@ -117,6 +117,7 @@ struct DailyHomeView: View {
                     }
                     .modifier(FlipEffect(flipped: $flipped, angle: flip ? 0 : 180))
                     .onTapGesture(count: 1, perform: {
+                        hideKeyboard()
                         withAnimation {
                             if (onDailyFlicCard) {
                                 onDailyFlicCard = false
@@ -336,7 +337,7 @@ struct ReflectionCard:View {
                         .frame(width: (DailyFlicCard.width * 0.85), height: (DailyFlicCard.height * 0.23), alignment: .center)
                         .multilineTextAlignment(.leading)
                         .opacity((reflectionText == "Write reflection...") ? 0.90 : 1)
-                        .background(Color("BackgroudnColor"))
+                        .background(Color("BackgroundColor"))
                         .foregroundColor((reflectionText == "Write reflection...") ? .gray : Color("PrimaryColor"))
                         .lineLimit(100).onAppear {
                             // put back the placeholder text if the user dismisses the keyboard without adding any text
@@ -348,6 +349,9 @@ struct ReflectionCard:View {
                                 }
                             }
                         }.onTapGesture {
+                            if typing {
+                                hideKeyboard()
+                            }
                             typing = true
                             if reflectionText == "Write reflection..." {
                                 reflectionText = ""
@@ -547,3 +551,11 @@ func getSubmitted(results: FetchedResults<RevealController>) -> Bool {
     }
     return false;
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
