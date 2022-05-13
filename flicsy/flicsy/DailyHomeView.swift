@@ -31,14 +31,13 @@ struct DailyHomeView: View {
     static var minutes = calendar.component(.minute, from: date)
     static var seconds = calendar.component(.second, from: date)
 
-    
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: RevealController.entity(),
                   sortDescriptors: [])
     var revealController : FetchedResults<RevealController>
     
     let ceo: CLGeocoder = CLGeocoder()
-        
+    
     var body: some View {
         Color("BackgroundColor")
             .edgesIgnoringSafeArea(.all)
@@ -254,17 +253,17 @@ struct DailyFlicCard:View {
                         .font(.title2).foregroundColor(Color.white).frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
                     if photoCountry != "" {
                         if photoLocality != "" && photoAdministrativeArea != "" {
-                            Text(photoLocality + ", " + photoAdministrativeArea + "|  " + photoCountry)
+                            Text(photoLocality + ", " + photoAdministrativeArea + " |  " + photoCountry)
                                 .font(.headline)
                                 .foregroundColor(Color.white)
                                 .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
                         } else if photoAdministrativeArea != "" {
-                            Text(photoAdministrativeArea + "|  " + photoCountry)
+                            Text(photoAdministrativeArea + " |  " + photoCountry)
                                 .font(.headline)
                                 .foregroundColor(Color.white)
                                 .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
                         } else if photoLocality != "" {
-                            Text(photoLocality + "|  " + photoCountry)
+                            Text(photoLocality + " |  " + photoCountry)
                                 .font(.headline)
                                 .foregroundColor(Color.white)
                                 .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
@@ -307,41 +306,23 @@ struct ReflectionCard:View {
     @State private var title: String = "Untitled Reflection"
     @State var selectedEmotion = 0
     
-
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color.white)
             .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
             .overlay(
                 VStack {
-                    TextEditor(text: $title)
-                        .frame(maxWidth: (DailyFlicCard.width * 0.85), maxHeight: (DailyFlicCard.height * 0.1), alignment: .center)
-                        .multilineTextAlignment(.center)
-                        .opacity((title == "Untitled Reflection") ? 0.90 : 1)
+                    TextField("", text: $title)
                         .font(.largeTitle)
-                        .foregroundColor((title == "Untitled Reflection") ? .gray : Color("PrimaryColor"))
-                        .lineLimit(1).onAppear {
-                            // remove the placeholder text when keyboard appears
-                            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
-                                withAnimation {
-                                    if title == "Untitled Reflection" {
-                                        title = ""
-                                    }
-                                }
-                            }
-                            
-                            // put back the placeholder text if the user dismisses the keyboard without adding any text
-                            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
-                                withAnimation {
-                                    if title == "" {
-                                        title = "Write reflection..."
-                                    }
-                                }
-                            }
-                        }.onTapGesture {
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Color("PrimaryColor"))
+                        .frame(maxWidth: (DailyFlicCard.width * 0.85), alignment: .center)
+                        .padding(20).onTapGesture {
                             typing = true
+                            if title == "Untitled Reflection" {
+                                title = ""
+                            }
                         }
-
                     Text("How did this image make you feel?")
                         .font(.title2)
                         .foregroundColor(Color("PrimaryColor"))
@@ -353,17 +334,9 @@ struct ReflectionCard:View {
                         .frame(width: (DailyFlicCard.width * 0.85), height: (DailyFlicCard.height * 0.23), alignment: .center)
                         .multilineTextAlignment(.leading)
                         .opacity((reflectionText == "Write reflection...") ? 0.90 : 1)
+                        .background(Color("BackgroudnColor"))
                         .foregroundColor((reflectionText == "Write reflection...") ? .gray : Color("PrimaryColor"))
                         .lineLimit(100).onAppear {
-                            // remove the placeholder text when keyboard appears
-                            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
-                                withAnimation {
-                                    if reflectionText == "Write reflection..." {
-                                        reflectionText = ""
-                                    }
-                                }
-                            }
-                            
                             // put back the placeholder text if the user dismisses the keyboard without adding any text
                             NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
                                 withAnimation {
@@ -373,7 +346,10 @@ struct ReflectionCard:View {
                                 }
                             }
                         }.onTapGesture {
-                        typing = true
+                            typing = true
+                            if reflectionText == "Write reflection..." {
+                                reflectionText = ""
+                            }
                         }
                     HStack {
                         Button(" Submit ", action: submit)

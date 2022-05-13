@@ -124,15 +124,13 @@ func retrieveTodaysFlic() {
 struct ButtonRightContent: View {
     var body: some View {
         HStack {
-            Text("Next").foregroundColor(Color.white)
+            Text("Next").foregroundColor(Color("PrimaryColor"))
             Image(systemName: "chevron.right")
             .resizable()
-            .foregroundColor(Color.white)
+            .foregroundColor(Color("PrimaryColor"))
             .frame(width: 10, height: 20)
             .cornerRadius(30)
         }.padding()
-            .background(Color("PrimaryColor")
-                .cornerRadius(40))
     }
 }
 
@@ -141,43 +139,37 @@ struct ButtonLeftContent: View {
         HStack {
             Image(systemName: "chevron.left")
             .resizable()
-            .foregroundColor(Color.white)
+            .foregroundColor(Color("PrimaryColor"))
             .frame(width: 10, height: 20)
             .cornerRadius(30)
-            Text("Prev").foregroundColor(Color.white)
+            Text("Prev").foregroundColor(Color("PrimaryColor"))
         }.padding()
-            .background(Color("PrimaryColor"))
-            .cornerRadius(40)
     }
 }
 
 struct ButtonStartContent: View {
     var body: some View {
         HStack {
-            Text("Get Started").foregroundColor(Color.white)
+            Text("Get Started").foregroundColor(Color("PrimaryColor"))
             Image(systemName: "chevron.right")
             .resizable()
-            .foregroundColor(Color.white)
+            .foregroundColor(Color("PrimaryColor"))
             .frame(width: 10, height: 20)
             .cornerRadius(30)
         }.padding()
-            .background(Color("PrimaryColor")
-                .cornerRadius(40))
     }
 }
 
 struct ButtonFinishContent: View {
     var body: some View {
         HStack {
-            Text("Finish").foregroundColor(Color.white)
+            Text("Finish").foregroundColor(Color("PrimaryColor"))
             Image(systemName: "chevron.right")
             .resizable()
-            .foregroundColor(Color.white)
+            .foregroundColor(Color("PrimaryColor"))
             .frame(width: 10, height: 20)
             .cornerRadius(30)
         }.padding()
-            .background(Color("PrimaryColor")
-                .cornerRadius(40))
     }
 }
 

@@ -50,7 +50,7 @@ struct ContentView: View {
                             Image(systemName: "square.stack.fill")
                             Text("Flic History")
                         }.background(Color("BackgroundColor"))
-                    }.padding(.bottom, 5)
+                    }.padding(.bottom, 5).ignoresSafeArea(.keyboard, edges: .bottom)
                  }
             }.background(Color("BackgroundColor"))
                 .onAppear(perform: {
