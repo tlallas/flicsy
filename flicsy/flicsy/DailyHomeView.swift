@@ -48,11 +48,11 @@ struct DailyHomeView: View {
                             .font(.title)
                             .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
                         HStack {
-                            if (revealed && !submitted && onDailyFlicCard && (countDownTime == 0)) {
+                            if (revealed && !submitted && onDailyFlicCard) {
                                 Image("TapArrow").resizable().frame(width: 30, height: 25)
                                 Text("Tap to reflect")
                                     .foregroundColor(Color("PrimaryColor"))
-                            } else if(revealed && !submitted && !onDailyFlicCard && (countDownTime == 0)) {
+                            } else if(revealed && !submitted && !onDailyFlicCard) {
                                 Image("TapArrow").resizable().frame(width: 30, height: 25)
                                 Text("Tap for photo")
                                     .foregroundColor(Color("PrimaryColor"))
@@ -116,6 +116,7 @@ struct DailyHomeView: View {
                     }
                     .modifier(FlipEffect(flipped: $flipped, angle: flip ? 0 : 180))
                     .onTapGesture(count: 1, perform: {
+                        hideKeyboard()
                         withAnimation {
                             if (onDailyFlicCard) {
                                 onDailyFlicCard = false
@@ -344,6 +345,9 @@ struct ReflectionCard:View {
                                 }
                             }
                         }.onTapGesture {
+                            if typing {
+                                hideKeyboard()
+                            }
                             typing = true
                             if reflectionText == "Write reflection..." {
                                 reflectionText = ""
@@ -543,3 +547,11 @@ func getSubmitted(results: FetchedResults<RevealController>) -> Bool {
     }
     return false;
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
