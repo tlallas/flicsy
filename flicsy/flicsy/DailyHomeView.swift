@@ -61,7 +61,22 @@ struct DailyHomeView: View {
                         }.frame(maxWidth: DailyFlicCard.width - 20, alignment: .trailing)
                     }.frame(maxWidth: DailyFlicCard.width)
                     ZStack {
-                        if ((revealed && submitted) || waitForNext) {
+                        if (revealed && !submitted) {
+                            ReflectionCard(submitted: $submitted,
+                                           typing: $typing, date: $photoDateData,
+                                           dailyImage: $dailyImage, tabSelection: $tabSelection,
+                                           photoLocality: $photoLocality,
+                                           photoAdministrativeArea: $photoAdministrativeArea,
+                                           photoCountry: $photoCountry, revealController: revealController).opacity(flipped ? 0 : 1)
+                            
+                            DailyFlicCard(photoDateData: $photoDateData,
+                                          photoLocationData: $photoLocationData,
+                                          photoLocality: $photoLocality,
+                                          photoAdministrativeArea: $photoAdministrativeArea,
+                                          photoCountry: $photoCountry,
+                                          dailyImage: $dailyImage).opacity(flipped ? 1 : 0)
+                            
+                        } else if ((revealed && submitted) || waitForNext) {
                             CountDownCard(timeRemaining: $countDownTime).opacity(1)
                         } else if (!revealed) {
                             RevealCard().opacity(1).onTapGesture {
@@ -101,14 +116,14 @@ struct DailyHomeView: View {
                             ReflectionCard(submitted: $submitted, typing: $typing, date: $photoDateData, dailyImage: $dailyImage, tabSelection: $tabSelection,
                                            photoLocality: $photoLocality,
                                            photoAdministrativeArea: $photoAdministrativeArea,
-                                           photoCountry: $photoCountry).opacity(0)
+                                           photoCountry: $photoCountry, revealController: revealController).opacity(0)
                         } else {
                             ReflectionCard(submitted: $submitted,
                                            typing: $typing, date: $photoDateData,
                                            dailyImage: $dailyImage, tabSelection: $tabSelection,
                                            photoLocality: $photoLocality,
                                            photoAdministrativeArea: $photoAdministrativeArea,
-                                           photoCountry: $photoCountry).opacity(flipped ? 0 : 1)
+                                           photoCountry: $photoCountry, revealController: revealController).opacity(flipped ? 0 : 1)
                             
                             DailyFlicCard(photoDateData: $photoDateData,
                                           photoLocationData: $photoLocationData,
@@ -128,6 +143,8 @@ struct DailyHomeView: View {
                             }
                             if (!waitForNext && revealed && !submitted && !typing) {
                                 flip.toggle()
+                            } else if (revealed && !submitted){
+                                flip.toggle()
                             }
                             if (typing) {
                                 typing = false
@@ -140,6 +157,7 @@ struct DailyHomeView: View {
                         }
                     }.onAppear(perform: {
                         revealed = getRevealed(results: revealController)
+                        submitted = getSubmitted(results: revealController)
                         countDownTime = timeInSeconds()
                         if (revealed) {
                             waitForNext = true
@@ -302,9 +320,11 @@ struct ReflectionCard:View {
     @Binding var photoLocality : String //city
     @Binding var photoAdministrativeArea : String //state or region
     @Binding var photoCountry : String
+    var revealController : FetchedResults<RevealController>
     @State private var reflectionText: String = "Write reflection..."
     @State private var title: String = "Untitled Reflection"
     @State var selectedEmotion = 0
+    
     
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
@@ -352,12 +372,18 @@ struct ReflectionCard:View {
                             }
                         }
                     HStack {
-                        Button(" Submit ", action: submit)
-                            .foregroundColor(.white)
+                        Button {
+                            submit()
+                            setSubmittedTrue(revealController: revealController)
+                        } label : {
+                            Text("Save to History")
+                                .foregroundColor(.white)
+                        }
                     }.padding().background(Color("PrimaryColor")).cornerRadius(40)
                 }
             )
     }
+    
         
     func submit() {
         submitted = true
@@ -369,6 +395,7 @@ struct ReflectionCard:View {
         reflection.administrativeArea = photoAdministrativeArea
         reflection.locality = photoLocality
         reflection.emotion = emotionsDictionary.first(where: { $0.value == selectedEmotion})?.key
+        
         
 
         let tempImage = dailyImage
@@ -384,6 +411,36 @@ struct ReflectionCard:View {
 
         PersistenceController.shared.save()
         self.tabSelection = 1
+    }
+}
+
+func setSubmittedFalse(revealController: FetchedResults<RevealController>) {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    //FIRST use
+    if revealController.isEmpty {
+        let controller = RevealController(context: managedObjectContext)
+        controller.submitted = false
+        PersistenceController.shared.save()
+    }
+    //UPDATE existing revealController
+    for controller in revealController {
+        controller.submitted = false
+        PersistenceController.shared.save()
+    }
+}
+
+func setSubmittedTrue(revealController: FetchedResults<RevealController>) {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    //FIRST use
+    if revealController.isEmpty {
+        let controller = RevealController(context: managedObjectContext)
+        controller.submitted = true
+        PersistenceController.shared.save()
+    }
+    //UPDATE existing revealController
+    for controller in revealController {
+        controller.submitted = true
+        PersistenceController.shared.save()
     }
 }
 
@@ -497,21 +554,26 @@ func getRevealed(results: FetchedResults<RevealController>) -> Bool {
     print(results)
     if (!results.isEmpty) {
         for result in results {
-            print("NEXT REVEAL IS")
-   
             if let next = result.nextReveal {
                 print(next)
                 print(currDate)
                 if (currDate > next) {
-                    print("curr date greater than next")
                     return false;
                 } else {
-                    print("curr date leq")
                     return true
                 }
             }
         }
     }
-    print("returning false")
     return false;
+}
+
+func getSubmitted(results: FetchedResults<RevealController>) -> Bool {
+    if (!results.isEmpty) {
+        for result in results {
+            let submitted = result.submitted
+            return submitted
+        }
+    }
+    return false
 }
