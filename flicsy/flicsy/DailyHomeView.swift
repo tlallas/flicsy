@@ -46,6 +46,7 @@ struct DailyHomeView: View {
                     HStack {
                         Text("flicsy")
                             .foregroundColor(Color("PrimaryColor"))
+                            .fontWeight(.bold)
                             .font(.title)
                             .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
                         HStack {
@@ -305,7 +306,7 @@ struct ReflectionCard:View {
     @Binding var photoCountry : String
     var revealController : FetchedResults<RevealController>
     @State private var reflectionText: String = "Write reflection..."
-    @State private var title: String = "Untitled Reflection"
+    @State private var title: String = ""
     @State var selectedEmotion = 0
     
     
@@ -315,10 +316,10 @@ struct ReflectionCard:View {
             .frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
             .overlay(
                 VStack {
-                    TextField("", text: $title)
+                    TextField("Add Title", text: $title)
                         .font(.largeTitle)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(Color("PrimaryColor"))
+                        .foregroundColor(Color.black)
                         .frame(maxWidth: (DailyFlicCard.width * 0.85), alignment: .center)
                         .padding(20).onTapGesture {
                             typing = true
@@ -327,7 +328,7 @@ struct ReflectionCard:View {
                             }
                         }
                     Text("How did this image make you feel?")
-                        .font(.title2)
+                        .font(.headline)
                         .foregroundColor(Color("PrimaryColor"))
                         .frame(maxWidth: (DailyFlicCard.width * 0.85), alignment: .leading)
                     HStack {
@@ -338,7 +339,7 @@ struct ReflectionCard:View {
                         .multilineTextAlignment(.leading)
                         .opacity((reflectionText == "Write reflection...") ? 0.90 : 1)
                         .background(Color("BackgroundColor"))
-                        .foregroundColor((reflectionText == "Write reflection...") ? .gray : Color("PrimaryColor"))
+                        .foregroundColor((reflectionText == "Write reflection...") ? .gray : Color.black)
                         .lineLimit(100).onAppear {
                             // put back the placeholder text if the user dismisses the keyboard without adding any text
                             NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
