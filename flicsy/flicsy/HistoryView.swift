@@ -23,22 +23,21 @@ struct HistoryView: View {
     
     
     var body: some View {
-           Color("BackgroundColor")
-            .edgesIgnoringSafeArea(.all)
-            .overlay(
-                VStack {
-                    List {
-                        ForEach(reflections, id: \.self) { reflection in
-                            NavigationLink(destination: HistoryCardView(
-                                dailyImage:reflection.image!,
-                                title: reflection.title ?? "Untitled",
-                                reflection:reflection.text ?? "no text in the reflection",
-                                emotion: reflection.emotion ?? "",
-                                locality:reflection.locality ?? "",
-                                date:reflection.date ?? Date(),
-                                country:reflection.country ?? "",
-                                region: reflection.administrativeArea ?? ""))
-                            {
+        ZStack {
+            Image("HistoryBackground").resizable().ignoresSafeArea()
+            VStack {
+                List {
+                    ForEach(reflections, id: \.self) { reflection in
+                        NavigationLink(destination: HistoryCardView(
+                            dailyImage:reflection.image!,
+                            title: reflection.title ?? "Untitled",
+                            reflection:reflection.text ?? "no text in the reflection",
+                            emotion: reflection.emotion ?? "",
+                            locality:reflection.locality ?? "",
+                            date:reflection.date ?? Date(),
+                            country:reflection.country ?? "",
+                            region: reflection.administrativeArea ?? ""))
+                        {
                             HStack {
                                  if let thumbnailImage = UIImage(data: reflection.thumbnail!){
                                     Image(uiImage:thumbnailImage)
@@ -60,7 +59,7 @@ struct HistoryView: View {
                                             .frame(height: 40)
                                             .truncationMode(.tail)
                                     }
-                                    
+
                                     HStack {
                                         Text("\(reflection.date ?? Date(), formatter: Self.taskDateFormat)")
                                             .font(.subheadline)
@@ -72,7 +71,7 @@ struct HistoryView: View {
                                                 Text(emotion)
                                                     .font(.system(size: 13))
                                                     .foregroundColor(Color("PrimaryColor"))
-                                                
+
                                             }.padding([.leading, .trailing])
                                                 .background(Color("BabyBlueColor"))
                                                 .cornerRadius(30)
@@ -80,9 +79,10 @@ struct HistoryView: View {
                                     }
                                 }.padding(.leading, 5)
                             }
-                            }
                         }
                     }.onAppear(perform: {
+                        UITableView.appearance().backgroundColor = UIColor.clear
+                        UITableViewCell.appearance().backgroundColor = UIColor.clear
                         Analytics.logEvent("viewed_flic_history", parameters: nil)
                         Analytics.logEvent(AnalyticsEventScreenView,
                                            parameters: [AnalyticsParameterScreenName: "History List",
@@ -90,13 +90,14 @@ struct HistoryView: View {
                     })
                 }.navigationTitle("Flic History")
                     .background(Color("BackgroundColor"))
-            )
+                    }
+                }
     }
 }
 
-struct HistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryView()
-    }
-}
+//struct HistoryView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HistoryView()
+//    }
+//}
 
