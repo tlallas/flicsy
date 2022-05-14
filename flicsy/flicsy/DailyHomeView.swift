@@ -23,7 +23,6 @@ struct DailyHomeView: View {
     @State var photoLocality : String = "" //city
     @State var photoAdministrativeArea : String = "" //state or region
     @State var photoCountry : String = ""
-    @State var waitForNext : Bool = false
     @State var countDownTime : Int = 0
     static var date = Date()
     static var calendar = Calendar.current
@@ -125,7 +124,7 @@ struct DailyHomeView: View {
                             } else {
                                 onDailyFlicCard = true
                             }
-                            if (!waitForNext && revealed && !submitted && !typing) {
+                            if (revealed && !submitted && !typing) {
                                 flip.toggle()
                             } else if (revealed && !submitted){
                                 flip.toggle()
@@ -143,9 +142,6 @@ struct DailyHomeView: View {
                         revealed = getRevealed(results: revealController)
                         submitted = getSubmitted(results: revealController)
                         countDownTime = timeInSeconds()
-                        if (revealed && submitted) {
-                            waitForNext = true
-                        }
                     })
                 }
             )
