@@ -1,0 +1,6 @@
+framework module Pods_flicsyTests {
+  umbrella header "Pods-flicsyTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

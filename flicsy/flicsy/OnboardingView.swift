@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import Firebase
 
 struct OnboardingView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -90,12 +91,19 @@ struct OnboardingView: View {
                         newUser.isNewUser = false
                         PersistenceController.shared.save()
                         inOnboarding = false
+                        Analytics.logEvent("onboarding_complete", parameters: nil)
                     }
                     else if self.currentPageIndex == 2{
-                    retrieveTodaysFlic()
+                        retrieveTodaysFlic()
+                        if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
+                            Analytics.logEvent("authorized_photo_access", parameters: nil)
+                        }
                         self.currentPageIndex += 1
                     }
                     else {
+                        if self.currentPageIndex == 0 {
+                            Analytics.logEvent("opened_first_time", parameters: nil)
+                        }
                         self.currentPageIndex += 1
                     }
                 }) {

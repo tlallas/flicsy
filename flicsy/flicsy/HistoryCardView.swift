@@ -2,6 +2,7 @@
 import SwiftUI
 import PhotosUI
 import UIKit
+import Firebase
 
 struct HistoryCardView: View {
     @State var dailyImage:Data
@@ -39,9 +40,20 @@ struct HistoryCardView: View {
                         }
                     }).navigationBarTitleDisplayMode(.inline)
                         .navigationTitle("")
-                  
-                      
-            })
+                }).onAppear(perform: {
+                    Analytics.logEvent("viewed_card_in_history", parameters: [
+                        "photoDate": date,
+                        "emotion": emotion,
+                        "titleLength": title.count,
+                        "reflectionLength": reflection.count,
+                        "country": country,
+                        "adminArea": region,
+                        "locality": locality
+                    ])
+                    Analytics.logEvent(AnalyticsEventScreenView,
+                                       parameters: [AnalyticsParameterScreenName: "Card View",
+                                                    AnalyticsParameterScreenClass: "History"])
+                })
     }
 }
 
@@ -125,6 +137,12 @@ struct HistoryReflectionCard:View {
             let activityController = UIActivityViewController(activityItems: [reflection,dailyImage], applicationActivities: nil)
 
             UIApplication.shared.windows.first?.rootViewController!.present(activityController, animated: true, completion: nil)
+        
+        Analytics.logEvent("share_pressed", parameters: [
+            "emotion": emotion,
+            "titleLength": title.count,
+            "reflectionLength": reflection.count,
+        ])
     }
 
     var body: some View {

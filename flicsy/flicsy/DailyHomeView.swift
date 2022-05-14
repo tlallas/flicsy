@@ -7,6 +7,8 @@
 import SwiftUI
 import PhotosUI
 import UIKit
+import FirebaseAnalytics
+import Firebase
 
 struct DailyHomeView: View {
     @Binding var tabSelection: Int
@@ -61,22 +63,32 @@ struct DailyHomeView: View {
                     }.frame(maxWidth: DailyFlicCard.width)
                     ZStack {
                         if (revealed && !submitted) {
-                            ReflectionCard(submitted: $submitted,
+                            if !Calendar.current.isDateInToday(photoDateData) {
+                                ReflectionCard(submitted: $submitted,
                                            typing: $typing, date: $photoDateData,
                                            dailyImage: $dailyImage, tabSelection: $tabSelection,
                                            photoLocality: $photoLocality,
                                            photoAdministrativeArea: $photoAdministrativeArea,
                                            photoCountry: $photoCountry, revealController: revealController).opacity(flipped ? 0 : 1)
                             
-                            DailyFlicCard(photoDateData: $photoDateData,
+                                DailyFlicCard(photoDateData: $photoDateData,
                                           photoLocationData: $photoLocationData,
                                           photoLocality: $photoLocality,
                                           photoAdministrativeArea: $photoAdministrativeArea,
                                           photoCountry: $photoCountry,
                                           dailyImage: $dailyImage).opacity(flipped ? 1 : 0)
-                            
+                            } else {
+                                CountDownCard(timeRemaining: $countDownTime).opacity(1)
+                                    .onAppear(perform:{
+                                        revealed = true
+                                        submitted = true
+                                    })
+                            }
                         } else if (revealed && submitted) {
                             CountDownCard(timeRemaining: $countDownTime).opacity(1)
+                                .onAppear(perform: {
+                                    Analytics.logEvent("viewed_countdown", parameters: nil)
+                                })
                         } else if (!revealed) {
                             RevealCard().opacity(1).onTapGesture {
                                 RevealCard().opacity(0)
@@ -108,10 +120,12 @@ struct DailyHomeView: View {
                                     controller.nextReveal = nextRevealTime
                                     PersistenceController.shared.save()
                                 }
-                             
-                                
+                                Analytics.logEvent("tapped_to_reveal", parameters: [
+                                    "photoLocality": photoLocality,
+                                    "photoAdminArea": photoAdministrativeArea,
+                                    "photoCountry": photoCountry
+                                ])
                             }
-                        
                         }
                     }
                     .modifier(FlipEffect(flipped: $flipped, angle: flip ? 0 : 180))
@@ -125,8 +139,10 @@ struct DailyHomeView: View {
                             }
                             if (revealed && !submitted && !typing) {
                                 flip.toggle()
+                                Analytics.logEvent("flipped_photo_ref_card", parameters: nil)
                             } else if (revealed && !submitted){
                                 flip.toggle()
+                                Analytics.logEvent("flipped_photo_ref_card", parameters: nil)
                             }
                             if (typing) {
                                 typing = false
@@ -141,6 +157,9 @@ struct DailyHomeView: View {
                         revealed = getRevealed(results: revealController)
                         submitted = getSubmitted(results: revealController)
                         countDownTime = timeInSeconds()
+                        Analytics.logEvent(AnalyticsEventScreenView,
+                                           parameters: [AnalyticsParameterScreenName: "Today's Flic",
+                                                        AnalyticsParameterScreenClass: "Today's Flic"])
                     })
                 }
             )
@@ -218,6 +237,7 @@ struct RevealCard:View {
                             .foregroundColor(Color("PrimaryColor"))
             }.frame(maxWidth: DailyFlicCard.width, maxHeight: DailyFlicCard.height, alignment: .center)
         }.clipped().cornerRadius(10).frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
+            
     }
 }
 
@@ -318,6 +338,7 @@ struct ReflectionCard:View {
                         .frame(maxWidth: (DailyFlicCard.width * 0.85), alignment: .center)
                         .padding(20).onTapGesture {
                             typing = true
+                            Analytics.logEvent("tapped_to_add_title", parameters: nil)
                             if title == "Untitled Reflection" {
                                 title = ""
                             }
@@ -352,6 +373,7 @@ struct ReflectionCard:View {
                             if reflectionText == "Write reflection..." {
                                 reflectionText = ""
                             }
+                            Analytics.logEvent("tapped_to_write_reflection", parameters: nil)
                         }
                     HStack {
                         Button {
@@ -362,6 +384,11 @@ struct ReflectionCard:View {
                                 .foregroundColor(.white)
                         }
                     }.padding().background(Color("PrimaryColor")).cornerRadius(40)
+                }
+            ).onAppear( perform: {
+                Analytics.logEvent(AnalyticsEventScreenView,
+                                   parameters: [AnalyticsParameterScreenName: "Write Reflection",
+                                                AnalyticsParameterScreenClass: "Today's Flic"])
                 }
             )
     }
@@ -378,6 +405,14 @@ struct ReflectionCard:View {
         reflection.locality = photoLocality
         reflection.emotion = emotionsDictionary.first(where: { $0.value == selectedEmotion})?.key
         
+        Analytics.logEvent("saved_reflection", parameters: [
+            "emotion": reflection.emotion ?? "",
+            "titleLength": title.count,
+            "reflectionLength": reflectionText.count,
+            "country": photoCountry,
+            "adminArea": photoAdministrativeArea,
+            "locality": photoLocality
+        ])
         
 
         let tempImage = dailyImage
@@ -440,6 +475,11 @@ struct CountDownCard:View {
                             }
             }.frame(maxWidth: DailyFlicCard.width, maxHeight: DailyFlicCard.height, alignment: .center).navigationBarHidden(true)
         }.clipped().cornerRadius(10).frame(width: DailyFlicCard.width, height: DailyFlicCard.height)
+            .onAppear(perform: {
+                Analytics.logEvent(AnalyticsEventScreenView,
+                                   parameters: [AnalyticsParameterScreenName: "Countdown",
+                                                AnalyticsParameterScreenClass: "Today's Flic"])
+            })
     }
     
     //Convert the time into 24hr (24:00:00) format
@@ -507,6 +547,9 @@ struct EmotionScrollButtonView : View {
                         isMarked: $selection.wrappedValue == value ? true : false,
                         callback: { selected in
                             self.selection = selected
+                            Analytics.logEvent("pressed_emotion", parameters: [
+                                "emotion": selected
+                            ])
                             print("Selection is: \(selected)")
                         }
                     )

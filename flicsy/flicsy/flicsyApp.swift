@@ -9,20 +9,25 @@ import SwiftUI
 import UIKit
 import PhotosUI
 import Foundation
+import FirebaseCore
+import FirebaseAnalytics
 
 @main
 struct flicsyApp: App {
     let persistentController = PersistenceController.shared
     @Environment(\.scenePhase) var scenePhase
 //    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate NOT IN USE
-
+    
+    init () {
+        FirebaseApp.configure()
+        let user = UUID()
+        Analytics.setUserID(user.uuidString) //track events according to user
+    }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistentController.container.viewContext)
-               
-           
         }
         .onChange(of: scenePhase) { (newScenePhase) in
             switch newScenePhase {

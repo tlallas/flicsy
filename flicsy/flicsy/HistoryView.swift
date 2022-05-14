@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct HistoryView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -81,8 +82,14 @@ struct HistoryView: View {
                             }
                             }
                         }
-                    }
-                }.navigationTitle("Flic History").background(Color("BackgroundColor"))
+                    }.onAppear(perform: {
+                        Analytics.logEvent("viewed_flic_history", parameters: nil)
+                        Analytics.logEvent(AnalyticsEventScreenView,
+                                           parameters: [AnalyticsParameterScreenName: "History List",
+                                                        AnalyticsParameterScreenClass: "History"])
+                    })
+                }.navigationTitle("Flic History")
+                    .background(Color("BackgroundColor"))
             )
     }
 }
