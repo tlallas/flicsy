@@ -26,6 +26,9 @@ struct DailyHomeView: View {
     @State var photoAdministrativeArea : String = "" //state or region
     @State var photoCountry : String = ""
     @State var countDownTime : Int = 0
+    @State var showSkipModalView : Bool = false
+    @State var alreadySkipped = false
+    @State var showAlert = false
     static var date = Date()
     static var calendar = Calendar.current
     static var hours = calendar.component(.hour, from: date)
@@ -49,19 +52,29 @@ struct DailyHomeView: View {
                             .foregroundColor(Color("PrimaryColor"))
                             .fontWeight(.bold)
                             .font(.title)
-                            .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
+                            .frame(maxWidth: DailyFlicCard.width - 50, alignment: .leading)
+
                         HStack {
                             if (revealed && !submitted && onDailyFlicCard) {
-                                Image("TapArrow").resizable().frame(width: 30, height: 25)
+                                Spacer()
                                 Text("Tap to reflect")
                                     .foregroundColor(Color("PrimaryColor"))
+                                    
+                                Image(systemName:"arrow.turn.right.down")
+                                    .foregroundColor(Color("PrimaryColor"))
+                                
                             } else if(revealed && !submitted && !onDailyFlicCard) {
-                                Image("TapArrow").resizable().frame(width: 30, height: 25)
+     
                                 Text("Tap for photo")
                                     .foregroundColor(Color("PrimaryColor"))
+                                   
+                                Image(systemName:"arrow.turn.right.down")
+                                    .foregroundColor(Color("PrimaryColor"))
+                                    
                             }
-                        }.frame(maxWidth: DailyFlicCard.width - 20, alignment: .trailing)
+                        }.frame(maxWidth: DailyFlicCard.width - 20, alignment: .center)
                     }.frame(maxWidth: DailyFlicCard.width)
+                    
                     ZStack {
                         if (revealed && !submitted) {
                             if !Calendar.current.isDateInToday(photoDateData) {
@@ -78,6 +91,7 @@ struct DailyHomeView: View {
                                           photoAdministrativeArea: $photoAdministrativeArea,
                                           photoCountry: $photoCountry,
                                           dailyImage: $dailyImage).opacity(flipped ? 1 : 0)
+                                
                             } else {
                                 CountDownCard(timeRemaining: $countDownTime).opacity(1)
                                     .onAppear(perform:{
@@ -150,13 +164,40 @@ struct DailyHomeView: View {
                             }
                         }
                     })
+                    Button(action: {
+                        if !alreadySkipped {
+                            showSkipModalView.toggle()
+                        } else {
+                            showAlert.toggle()
+                        }
+                        }, label: {
+                                HStack {
+                                    Spacer()
+                                    Text("Skip")
+                                        .font(.system(size: 11))
+                                        
+                                    Image(systemName: "forward.fill")
+                                        .font(.system(size: 11))
+                                }.foregroundColor(Color.gray)
+                                .padding([.bottom, .trailing])
+                                
+                        }).padding(.trailing)
+                        .opacity(revealed && !submitted && onDailyFlicCard ? 1 : 0)
+                        .sheet(isPresented: $showSkipModalView) {
+                            SkipView(isPresented: $showSkipModalView, revealed: $revealed, submitted: $submitted, alreadySkipped: $alreadySkipped)
+                                  }
+                        .alert(isPresented: $showAlert) {
+                            Alert(title: Text("You already skipped a flic today!"), message: Text("Skips are limited to 1 per day."), dismissButton: .default(Text("Got it!"))) }
+                    
                     VStack {
                         if (!revealed || !submitted || (countDownTime == 0)) {
                             Spacer(minLength: DailyFlicCard.spacerHeight)
                         }
+                        
                     }.onAppear(perform: {
                         revealed = getRevealed(results: revealController)
                         submitted = getSubmitted(results: revealController)
+                        alreadySkipped = getSkipped(results: revealController)
                         countDownTime = timeInSeconds()
                         Analytics.logEvent(AnalyticsEventScreenView,
                                            parameters: [AnalyticsParameterScreenName: "Today's Flic",
@@ -306,6 +347,7 @@ struct DailyFlicCard:View {
                     }
                 }
             }.frame(maxHeight: DailyFlicCard.height, alignment: .bottom)
+            
         }.clipped().cornerRadius(10)
     }
 }
@@ -567,7 +609,7 @@ func getRevealed(results: FetchedResults<RevealController>) -> Bool {
         for result in results {
             if let next = result.nextReveal {
                 if (currDate > next) {
-                    return false;
+                    return false
                 } else {
                     return true
                 }
@@ -581,6 +623,21 @@ func getSubmitted(results: FetchedResults<RevealController>) -> Bool {
     if (!results.isEmpty) {
         for result in results {
             if let last = result.submitted {
+                if Calendar.current.isDateInToday(last) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+    }
+    return false;
+}
+
+func getSkipped(results: FetchedResults<RevealController>) -> Bool {
+    if (!results.isEmpty) {
+        for result in results {
+            if let last = result.lastSkip {
                 if Calendar.current.isDateInToday(last) {
                     return true
                 } else {

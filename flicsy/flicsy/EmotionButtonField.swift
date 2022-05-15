@@ -72,6 +72,7 @@ struct EmotionButtonField: View {
                 Image(label)
                 Text(label)
                     .font(Font.system(size: textSize))
+                    .foregroundColor(Color("PrimaryColor"))
                 Spacer()
             }.padding()
             .foregroundColor(self.color)

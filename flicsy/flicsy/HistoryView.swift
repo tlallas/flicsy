@@ -14,6 +14,9 @@ struct HistoryView: View {
                   sortDescriptors: [NSSortDescriptor(keyPath: \Reflection.date, ascending: false)])
     var reflections: FetchedResults<Reflection>
     
+    init () {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.init(Color("PrimaryColor"))]
+    }
     static let taskDateFormat: DateFormatter = {
         let formatter = DateFormatter()
 //        formatter.dateStyle = .short

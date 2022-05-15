@@ -44,7 +44,10 @@ struct OnboardingView: View {
                             .padding(.top)
                     }
                 } else if self.currentPageIndex == 1 {
-                    Image("gift").padding(.top, 75)
+                    Image("gift")
+                        .resizable()
+                        .frame(width: 320, height: 272)
+                        .padding(.top, 75)
                 } else if self.currentPageIndex == 2 {
                     Image("reflectOnboard")
                         .resizable()
