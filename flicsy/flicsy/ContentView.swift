@@ -48,7 +48,7 @@ struct ContentView: View {
                         .tag(1)
                         .tabItem {
                             Image(systemName: "square.stack.fill")
-                            Text("Flic History")
+                            Text("History")
                         }.background(Color("BackgroundColor"))
                     }.padding(.bottom, 5).ignoresSafeArea(.keyboard, edges: .bottom)
                  }

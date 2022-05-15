@@ -56,7 +56,6 @@ struct EmotionButtonField: View {
         self.textSize = textSize
         self.isMarked = isMarked
         self.callback = callback
-            
     }
     
     var body: some View {
@@ -77,8 +76,7 @@ struct EmotionButtonField: View {
             }.padding()
             .foregroundColor(self.color)
             .background(self.isMarked ? Color("BabyBlueColor") : Color.white)
-            .cornerRadius(12)
-               
+            .cornerRadius(12) 
         }
         .foregroundColor(Color.white)
     }

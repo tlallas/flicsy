@@ -153,7 +153,7 @@ struct HistoryReflectionCard:View {
                 VStack {
                     if (emotion != "") {
                         VStack() {
-                            Image(emotion)
+                            Image(emotion + "-white")
                             Text(emotion).font(Font.system(size: 12))
                         }.padding()
                             .foregroundColor(Color.white)

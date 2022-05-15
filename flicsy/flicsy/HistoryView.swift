@@ -29,7 +29,15 @@ struct HistoryView: View {
         ZStack {
             Image("HistoryBackground").resizable().ignoresSafeArea()
             VStack {
+                if reflections.isEmpty {
+                    Text("Add to your history by revealing a flic & writing a reflection.")
+                        .font(.headline)
+                        .foregroundColor(Color("PrimaryColor"))
+                        .padding([.leading, .trailing])
+                        .padding(.bottom, 100)
+                }
                 List {
+                    
                     ForEach(reflections, id: \.self) { reflection in
                         NavigationLink(destination: HistoryCardView(
                             dailyImage:reflection.image!,
@@ -91,7 +99,7 @@ struct HistoryView: View {
                                            parameters: [AnalyticsParameterScreenName: "History List",
                                                         AnalyticsParameterScreenClass: "History"])
                     })
-                }.navigationTitle("Flic History")
+                }.navigationTitle("History")
                     .background(Color("BackgroundColor"))
                     }
                 }
