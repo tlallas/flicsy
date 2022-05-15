@@ -58,7 +58,7 @@ struct SkipView: View {
           
           VStack {
               MultiSelectionView(
-                  options: ["It is a junk photo", "I don't want to see photos of this place", "I don't want to see photos from this time", "I don't want to see photos with this person/people", "Other"].map { IdentifiableString(string: $0) },
+                  options: ["It is a junk photo", "It is a bad photo of me", "It is a bad photo of someone else", "I don't want to see photos of this place", "I don't want to see photos from this time", "I don't want to see photos with this person/people", "Other"].map { IdentifiableString(string: $0) },
                   optionToString: { $0.string },
                   selected: $selected
               ).frame(maxHeight: 300)

@@ -225,40 +225,51 @@ struct DailyHomeView: View {
         } else {
             let fetchOptions = PHFetchOptions()
             fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-            fetchOptions.fetchLimit = 10000
+            fetchOptions.fetchLimit = 15000
             fetchOptions.predicate = NSPredicate(format: "mediaType == \(PHAssetMediaType.image.rawValue) AND !((mediaSubtype & \(PHAssetMediaSubtype.photoScreenshot.rawValue)) == \(PHAssetMediaSubtype.photoScreenshot.rawValue))")
             let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
 
             if fetchResult.count > 0 {
                 let fetched = fetchResult.count
-                let index = Int.random(in: 1..<fetched)
+                var index = Int.random(in: 1..<fetched)
+                print(index)
                 let requestOptions = PHImageRequestOptions()
                 requestOptions.isSynchronous = true
-                PHImageManager.default().requestImage(for: fetchResult.object(at: index) as PHAsset,
-                                                      targetSize: PHImageManagerMaximumSize,
-                                                      contentMode: PHImageContentMode.aspectFill,
-                                                      options: requestOptions, resultHandler: { (image, _) in
-                    dailyImage = image!
-                    let asset = fetchResult.object(at: index)
-                    //Get date from metadata
-                    photoDateData = asset.creationDate ?? Date()
+                var imgHolder : UIImage = UIImage()
+                while imgHolder.size == CGSize(width: 0, height: 0) {
+                    PHImageManager.default().requestImage(for: fetchResult.object(at: index) as PHAsset,
+                                                          targetSize: PHImageManagerMaximumSize,
+                                                          contentMode: PHImageContentMode.aspectFill,
+                                                          options: requestOptions, resultHandler: { (image, _) in
+                        if image != nil {
+                            imgHolder = image!
+                            dailyImage = image!
+                            let asset = fetchResult.object(at: index)
+                            //Get date from metadata
+                            photoDateData = asset.creationDate ?? Date()
 
-                    //Get location from metadata
-                    photoLocationData = asset.location ?? CLLocation()
-                    //Extract usable location information
-                    ceo.reverseGeocodeLocation(photoLocationData, completionHandler: {(placemarks, error) in
-                        if (error != nil) {
-                            print("Error retrieving location.")
-                        }
-                        let pm = placemarks! as [CLPlacemark]
-                        if pm.count > 0 { //found place
-                            let place = placemarks![0]
-                            photoLocality = place.locality ?? ""
-                            photoAdministrativeArea = place.administrativeArea ?? ""
-                            photoCountry = place.country ?? ""
+                            //Get location from metadata
+                            photoLocationData = asset.location ?? CLLocation()
+                            //Extract usable location information
+                            ceo.reverseGeocodeLocation(photoLocationData, completionHandler: {(placemarks, error) in
+                                if (error != nil) {
+                                    print("Error retrieving location.")
+                                }
+                                let pm = placemarks! as [CLPlacemark]
+                                if pm.count > 0 { //found place
+                                    let place = placemarks![0]
+                                    photoLocality = place.locality ?? ""
+                                    photoAdministrativeArea = place.administrativeArea ?? ""
+                                    photoCountry = place.country ?? ""
+                                }
+                            })
+                        } else {
+                            index = Int.random(in: 1..<fetched)
                         }
                     })
-                })
+                    
+                }
+                
             }
         }
     }
