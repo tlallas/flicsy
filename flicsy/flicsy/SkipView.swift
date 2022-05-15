@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 struct SkipView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -83,6 +84,11 @@ struct SkipView: View {
                       }
                       isPresented = false
                       alreadySkipped = true
+                      
+                      Analytics.logEvent("skip_completed", parameters: [
+                        "reasons": selected
+                      ])
+                      
                   }, label: {
                       Text("Skip Photo")
                           .padding()

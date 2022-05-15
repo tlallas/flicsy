@@ -167,8 +167,10 @@ struct DailyHomeView: View {
                     Button(action: {
                         if !alreadySkipped {
                             showSkipModalView.toggle()
+                            Analytics.logEvent("tried_skip_again", parameters: nil)
                         } else {
                             showAlert.toggle()
+                            Analytics.logEvent("skip_pressed", parameters: nil)
                         }
                         }, label: {
                                 HStack {
