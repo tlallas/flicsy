@@ -88,17 +88,17 @@ struct HistoryFlicCard:View {
                         .font(.title2).foregroundColor(Color.white).frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
                     if country != "" {
                         if locality != "" && region != "" {
-                            Text(locality + ", " + region + "|  " + country)
+                            Text(locality + ", " + region + " |  " + country)
                                 .font(.headline)
                                 .foregroundColor(Color.white)
                                 .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
                         } else if region != "" {
-                            Text(region + "|  " + country)
+                            Text(region + " |  " + country)
                                 .font(.headline)
                                 .foregroundColor(Color.white)
                                 .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
                         } else if locality != "" {
-                            Text(locality + "|  " + country)
+                            Text(locality + " |  " + country)
                                 .font(.headline)
                                 .foregroundColor(Color.white)
                                 .frame(maxWidth: DailyFlicCard.width - 20, alignment: .leading)
