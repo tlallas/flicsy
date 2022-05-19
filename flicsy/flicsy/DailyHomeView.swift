@@ -29,11 +29,6 @@ struct DailyHomeView: View {
     @State var showSkipModalView : Bool = false
     @State var alreadySkipped = false
     @State var showAlert = false
-//    static var date = Date()
-//    static var calendar = Calendar.current
-//    static var hours = calendar.component(.hour, from: date)
-//    static var minutes = calendar.component(.minute, from: date)
-//    static var seconds = calendar.component(.second, from: date)
 
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: RevealController.entity(),

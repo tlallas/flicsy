@@ -134,7 +134,7 @@ struct HistoryReflectionCard:View {
     @Binding var dailyImage: Data
     
     func shareButton() {
-            let activityController = UIActivityViewController(activityItems: [reflection,dailyImage], applicationActivities: nil)
+            let activityController = UIActivityViewController(activityItems: ["Check out my Flicsy: " + reflection,dailyImage], applicationActivities: nil)
 
             UIApplication.shared.windows.first?.rootViewController!.present(activityController, animated: true, completion: nil)
         
@@ -176,9 +176,11 @@ struct HistoryReflectionCard:View {
                         Spacer()
                     }
                     Spacer()
-                    Button("Share", action: shareButton)
-                        .foregroundColor(Color.white)
-                        .font(.title2)
+                    HStack {
+                        Button("Share", action: shareButton)
+                            .foregroundColor(Color("PrimaryColor"))
+                            .font(.title2)
+                    }.padding().background(Color.white).cornerRadius(40)
                     Spacer()
                 }.frame(maxWidth:DailyFlicCard.width, maxHeight: DailyFlicCard.height)
             )
