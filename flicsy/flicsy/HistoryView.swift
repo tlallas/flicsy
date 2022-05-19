@@ -100,7 +100,6 @@ struct HistoryView: View {
                                                         AnalyticsParameterScreenClass: "History"])
                     })
                 }.navigationTitle("History")
-                    .background(Color("BackgroundColor"))
                     }
                 }
     }
