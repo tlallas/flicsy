@@ -52,7 +52,7 @@ struct DailyHomeView: View {
                         HStack {
                             if (revealed && !submitted && onDailyFlicCard) {
                                 Spacer()
-                                Text("Tap below to reflect")
+                                Text("Tap pic to reflect")
                                     .foregroundColor(Color("PrimaryColor"))
                                     .onTapGesture(perform: {
                                         Analytics.logEvent("tap_to_reflect_tapped", parameters: nil)
@@ -65,7 +65,7 @@ struct DailyHomeView: View {
                                     })
                             } else if(revealed && !submitted && !onDailyFlicCard) {
      
-                                Text("Tap below for photo")
+                                Text("Tap for photo")
                                     .foregroundColor(Color("PrimaryColor"))
                                    
                                 Image(systemName:"arrow.turn.right.down")
