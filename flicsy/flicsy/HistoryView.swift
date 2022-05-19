@@ -94,18 +94,13 @@ struct HistoryView: View {
                                                          Text(emotion)
                                                              .font(.system(size: 13))
                                                              .foregroundColor(Color("PrimaryColor"))
-
-                                                     }.padding([.leading, .trailing])
-                                                         .background(Color("BabyBlueColor"))
-                                                         .cornerRadius(30)
+                                                     }
                                                  }
                                              }
                                          }
-                                    }
+                                     }
                                 }
-
                             }
-
                         }
                     }
                 }
