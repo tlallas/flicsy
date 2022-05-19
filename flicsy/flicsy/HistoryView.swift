@@ -37,7 +37,6 @@ struct HistoryView: View {
                         .padding(.bottom, 100)
                 }
                 List {
-                    
                     ForEach(reflections, id: \.self) { reflection in
                         NavigationLink(destination: HistoryCardView(
                             dailyImage:reflection.image!,

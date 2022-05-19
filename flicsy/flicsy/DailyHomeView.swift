@@ -233,7 +233,7 @@ struct DailyHomeView: View {
 
             if fetchResult.count > 0 {
                 let fetched = fetchResult.count
-                var index = Int.random(in: 1..<fetched)
+                var index = Int.random(in: 0..<fetched)
                 print(index)
                 let requestOptions = PHImageRequestOptions()
                 requestOptions.isSynchronous = true

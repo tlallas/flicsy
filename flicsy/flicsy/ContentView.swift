@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct ContentView: View {
     @State private var tabSelection = 0
@@ -26,6 +27,12 @@ struct ContentView: View {
             VStack() {
                 if inOnboarding {
                     OnboardingView(inOnboarding: $inOnboarding)
+                } else if (PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized || PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.notDetermined){
+                    NavigationView {
+                        VStack{
+                            NoPhotoAccessView()
+                        }
+                    }
                 } else {
                     TabView (selection: $tabSelection) {
                         NavigationView {

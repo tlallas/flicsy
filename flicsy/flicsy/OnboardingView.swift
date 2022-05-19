@@ -103,6 +103,8 @@ struct OnboardingView: View {
                         retrieveTodaysFlic()
                         if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
                             Analytics.logEvent("authorized_photo_access", parameters: nil)
+                        } else {
+                            Analytics.logEvent("did_not_authorize_photo_access", parameters: nil)
                         }
                         self.currentPageIndex += 1
                     }
