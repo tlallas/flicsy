@@ -12,6 +12,7 @@ import Firebase
 struct OnboardingView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     let persistentController = PersistenceController.shared
+    let notificationController = NotificationsController()
     @FetchRequest(entity: User.entity(),sortDescriptors:[])
     var user: FetchedResults<User>
     @Binding var inOnboarding : Bool
@@ -93,6 +94,8 @@ struct OnboardingView: View {
                         let newUser = User(context: persistentController.container.viewContext)
                         newUser.isNewUser = false
                         PersistenceController.shared.save()
+                        notificationController.establishNotificationPermissions()
+                        notificationController.scheduleLocal(time: getLunchTime())
                         inOnboarding = false
                         Analytics.logEvent("onboarding_complete", parameters: nil)
                     }
@@ -183,5 +186,14 @@ struct ButtonFinishContent: View {
         }.padding()
     }
 }
+
+func getLunchTime() -> Date {
+    var components = DateComponents()
+    components.calendar = Calendar.current
+    components.hour = 12 //12pm, lunchtime notifications
+    let dateToReg = Calendar.current.nextDate(after: Date(), matching: components, matchingPolicy: .nextTime)!
+    return dateToReg
+}
+
 
 
