@@ -29,11 +29,11 @@ struct DailyHomeView: View {
     @State var showSkipModalView : Bool = false
     @State var alreadySkipped = false
     @State var showAlert = false
-    static var date = Date()
-    static var calendar = Calendar.current
-    static var hours = calendar.component(.hour, from: date)
-    static var minutes = calendar.component(.minute, from: date)
-    static var seconds = calendar.component(.second, from: date)
+//    static var date = Date()
+//    static var calendar = Calendar.current
+//    static var hours = calendar.component(.hour, from: date)
+//    static var minutes = calendar.component(.minute, from: date)
+//    static var seconds = calendar.component(.second, from: date)
 
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: RevealController.entity(),
@@ -57,15 +57,20 @@ struct DailyHomeView: View {
                         HStack {
                             if (revealed && !submitted && onDailyFlicCard) {
                                 Spacer()
-                                Text("Tap to reflect")
+                                Text("Tap below to reflect")
                                     .foregroundColor(Color("PrimaryColor"))
+                                    .onTapGesture(perform: {
+                                        Analytics.logEvent("tap_to_reflect_tapped", parameters: nil)
+                                    })
                                     
                                 Image(systemName:"arrow.turn.right.down")
                                     .foregroundColor(Color("PrimaryColor"))
-                                
+                                    .onTapGesture(perform: {
+                                        Analytics.logEvent("tap_for_photo_tapped", parameters: nil)
+                                    })
                             } else if(revealed && !submitted && !onDailyFlicCard) {
      
-                                Text("Tap for photo")
+                                Text("Tap below for photo")
                                     .foregroundColor(Color("PrimaryColor"))
                                    
                                 Image(systemName:"arrow.turn.right.down")
@@ -211,9 +216,11 @@ struct DailyHomeView: View {
     
     //Convert the time into seconds
     func timeInSeconds() -> Int {
-        let hoursInSeconds   = Int(DailyHomeView.hours) * 3600
-        let minutesInSeconds = Int(DailyHomeView.minutes) * 60
-        let secondsInSeconds = Int(DailyHomeView.seconds) * 1
+        let date = Date()
+        let calendar = Calendar.current
+        let hoursInSeconds   = Int(calendar.component(.hour, from: date)) * 3600
+        let minutesInSeconds = Int(calendar.component(.minute, from: date)) * 60
+        let secondsInSeconds = Int(calendar.component(.second, from: date)) * 1
         let secondsRemaining = totalSecondsInDay - (hoursInSeconds + minutesInSeconds + secondsInSeconds)
         return secondsRemaining
     }
@@ -395,7 +402,7 @@ struct ReflectionCard:View {
                         .padding(20).onTapGesture {
                             typing = true
                             Analytics.logEvent("tapped_to_add_title", parameters: nil)
-                            if title == "Untitled Reflection" {
+                            if title == "Add Title" {
                                 title = ""
                             }
                         }
