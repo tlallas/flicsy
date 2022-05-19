@@ -94,23 +94,26 @@ struct OnboardingView: View {
                         let newUser = User(context: persistentController.container.viewContext)
                         newUser.isNewUser = false
                         PersistenceController.shared.save()
-                        notificationController.establishNotificationPermissions()
-                        notificationController.scheduleLocal(time: getLunchTime())
                         inOnboarding = false
                         Analytics.logEvent("onboarding_complete", parameters: nil)
                     }
                     else if self.currentPageIndex == 2{
-                        retrieveTodaysFlic()
-                        if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
-                            Analytics.logEvent("authorized_photo_access", parameters: nil)
-                        } else {
-                            Analytics.logEvent("did_not_authorize_photo_access", parameters: nil)
-                        }
+                        notificationController.establishNotificationPermissions()
+                        notificationController.scheduleLocal(time: getLunchTime())
                         self.currentPageIndex += 1
+                        
                     }
                     else {
                         if self.currentPageIndex == 0 {
                             Analytics.logEvent("opened_first_time", parameters: nil)
+                        }
+                        if self.currentPageIndex == 1 {
+                            retrieveTodaysFlic()
+                            if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
+                                Analytics.logEvent("authorized_photo_access", parameters: nil)
+                            } else {
+                                Analytics.logEvent("did_not_authorize_photo_access", parameters: nil)
+                            }
                         }
                         self.currentPageIndex += 1
                     }
@@ -196,6 +199,5 @@ func getLunchTime() -> Date {
     let dateToReg = Calendar.current.nextDate(after: Date(), matching: components, matchingPolicy: .nextTime)!
     return dateToReg
 }
-
 
 
