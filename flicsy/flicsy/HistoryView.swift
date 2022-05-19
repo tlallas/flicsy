@@ -39,7 +39,7 @@ struct HistoryView: View {
                 List {
                     
                     ForEach(reflections, id: \.self) { reflection in
-                        NavigationLink(destination: HistoryCardView(
+                        NavigationLink(destination: LazyView(HistoryCardView(
                             dailyImage:reflection.image!,
                             title: reflection.title ?? "Untitled",
                             reflection:reflection.text ?? "no text in the reflection",
@@ -47,7 +47,7 @@ struct HistoryView: View {
                             locality:reflection.locality ?? "",
                             date:reflection.date ?? Date(),
                             country:reflection.country ?? "",
-                            region: reflection.administrativeArea ?? ""))
+                            region: reflection.administrativeArea ?? "")))
                         {
                             HStack {
                                  if let thumbnailImage = UIImage(data: reflection.thumbnail!){
