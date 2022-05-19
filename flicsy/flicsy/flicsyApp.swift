@@ -15,6 +15,7 @@ import FirebaseAnalytics
 @main
 struct flicsyApp: App {
     let persistentController = PersistenceController.shared
+    let hvm = HistoryViewModel()
     @Environment(\.scenePhase) var scenePhase
 //    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate NOT IN USE
     
@@ -34,10 +35,13 @@ struct flicsyApp: App {
             case .background:
                 print("Scene is in background")
                 persistentController.save()
+                hvm.fetchReflections()
             case .inactive:
                 print("Scene is inactive")
+                hvm.fetchReflections()
             case .active:
                 print("Scene is active")
+                hvm.fetchReflections()
             @unknown default:
                 print("Scene is default")
             }

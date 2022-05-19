@@ -15,6 +15,7 @@ struct HistoryCardView: View {
     @State var region:String
     @State var flipped:Bool = false
     @State var flip:Bool = false
+    @Binding var timeRemaining: Int 
     
 
                 
@@ -41,6 +42,7 @@ struct HistoryCardView: View {
                     }).navigationBarTitleDisplayMode(.inline)
                         .navigationTitle("")
                 }).onAppear(perform: {
+                    timeRemaining = -1
                     Analytics.logEvent("viewed_card_in_history", parameters: [
                         "photoDate": date,
                         "emotion": emotion,

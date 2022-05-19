@@ -198,8 +198,8 @@ struct DailyHomeView: View {
                         }
                         
                     }.onAppear(perform: {
-                        revealed = getRevealed(results: revealController)
-                        submitted = getSubmitted(results: revealController)
+//                        revealed = getRevealed(results: revealController)
+//                        submitted = getSubmitted(results: revealController)
                         alreadySkipped = getSkipped(results: revealController)
                         countDownTime = timeInSeconds()
                         Analytics.logEvent(AnalyticsEventScreenView,
@@ -382,7 +382,7 @@ struct ReflectionCard:View {
     @State private var reflectionText: String = "Write reflection..."
     @State private var title: String = ""
     @State var selectedEmotion = 0
-    
+    @StateObject var historyVM = HistoryViewModel()
     
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
@@ -455,17 +455,19 @@ struct ReflectionCard:View {
         
     func submit() {
         submitted = true
-        let reflection = Reflection(context: managedObjectContext)
-        reflection.text = reflectionText
-        reflection.title = title
-        reflection.date = date
-        reflection.country = photoCountry
-        reflection.administrativeArea = photoAdministrativeArea
-        reflection.locality = photoLocality
-        reflection.emotion = emotionsDictionary.first(where: { $0.value == selectedEmotion})?.key
+//        let reflection = Reflection(context: managedObjectContext)
+//        reflection.text = reflectionText
+//        reflection.title = title
+//        reflection.date = date
+//        reflection.country = photoCountry
+//        reflection.administrativeArea = photoAdministrativeArea
+//        reflection.locality = photoLocality
+//        reflection.emotion = emotionsDictionary.first(where: { $0.value == selectedEmotion})?.key
+        
+        historyVM.addReflection(reflectionText: reflectionText, title: title, date: date, photoCountry: photoCountry, photoAdministrativeArea: photoAdministrativeArea, photoLocality: photoLocality, selectedEmotion: selectedEmotion, dailyImage: dailyImage)
         
         Analytics.logEvent("saved_reflection", parameters: [
-            "emotion": reflection.emotion ?? "",
+//            "emotion": reflection.emotion ?? "",
             "titleLength": title.count,
             "reflectionLength": reflectionText.count,
             "country": photoCountry,
@@ -473,19 +475,20 @@ struct ReflectionCard:View {
             "locality": photoLocality
         ])
         
-
-        let tempImage = dailyImage
-        UIGraphicsBeginImageContext(CGSize(width:75, height: 100))
-        tempImage.draw(in: CGRect(x:0, y:0, width:75, height: 100))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        let pngImageData  = dailyImage.pngData()
-        let thumbnailData = newImage?.pngData()
         
-        reflection.image = pngImageData
-        reflection.thumbnail = thumbnailData
 
-        PersistenceController.shared.save()
+//        let tempImage = dailyImage
+//        UIGraphicsBeginImageContext(CGSize(width:75, height: 100))
+//        tempImage.draw(in: CGRect(x:0, y:0, width:75, height: 100))
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        let pngImageData  = dailyImage.pngData()
+//        let thumbnailData = newImage?.pngData()
+//
+//        reflection.image = pngImageData
+//        reflection.thumbnail = thumbnailData
+//
+//        PersistenceController.shared.save()
         self.tabSelection = 1
     }
 }

@@ -42,7 +42,7 @@ struct ContentView: View {
 
                         NavigationView {
                             VStack {
-                                HistoryView().onAppear(perform: {
+                                HistoryView(fromBackButton: false).onAppear(perform: {
                                     UITableView.appearance().backgroundColor = UIColor.clear
                                     UITableViewCell.appearance().backgroundColor = UIColor.clear
                                 })

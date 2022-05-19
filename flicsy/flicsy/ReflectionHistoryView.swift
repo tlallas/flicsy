@@ -34,8 +34,8 @@ struct ReflectionHistoryView: View {
     }
 }
 
-struct ReflectionHistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryView()
-    }
-}
+//struct ReflectionHistoryView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HistoryView()
+//    }
+//}

@@ -11,6 +11,8 @@
 		951C644328282FDE001234F8 /* EmotionButtonField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C644228282FDE001234F8 /* EmotionButtonField.swift */; };
 		951C64452828665A001234F8 /* DailyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C64442828665A001234F8 /* DailyHomeView.swift */; };
 		951C6447282A0072001234F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C6446282A0072001234F8 /* SceneDelegate.swift */; };
+		9563AC5F2836471E00B23E38 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563AC5E2836471E00B23E38 /* ActivityIndicator.swift */; };
+		956C300F28361DCC00100BE7 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956C300E28361DCC00100BE7 /* HistoryViewModel.swift */; };
 		9573C408282E0D9800779277 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9573C407282E0D9800779277 /* GoogleService-Info.plist */; };
 		9584086A283087F200CAF926 /* SkipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95840869283087F200CAF926 /* SkipView.swift */; };
 		9599A74F283592F10057A6D3 /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9599A74E283592F10057A6D3 /* NotificationsController.swift */; };
@@ -63,6 +65,8 @@
 		951C64442828665A001234F8 /* DailyHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHomeView.swift; sourceTree = "<group>"; };
 		951C6446282A0072001234F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ../SceneDelegate.swift; sourceTree = "<group>"; };
 		951F132F28149343004F46BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9563AC5E2836471E00B23E38 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		956C300E28361DCC00100BE7 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		9573C407282E0D9800779277 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		95840869283087F200CAF926 /* SkipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipView.swift; sourceTree = "<group>"; };
 		9599A74E283592F10057A6D3 /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 				9497F27A282872F30027B745 /* HistoryCardView.swift */,
 				9599A75028359EBF0057A6D3 /* LazyView.swift */,
 				95DBF87D281489B000662815 /* HistoryView.swift */,
+				9563AC5E2836471E00B23E38 /* ActivityIndicator.swift */,
+				956C300E28361DCC00100BE7 /* HistoryViewModel.swift */,
 				95D9C2AF281C2A7300982FD2 /* PersistenceController.swift */,
 				951C644228282FDE001234F8 /* EmotionButtonField.swift */,
 				95A9E9CF281C27F800AEA6FA /* FlicsyModel.xcdatamodeld */,
@@ -460,6 +466,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				95D9C2B0281C2A7300982FD2 /* PersistenceController.swift in Sources */,
+				956C300F28361DCC00100BE7 /* HistoryViewModel.swift in Sources */,
+				9563AC5F2836471E00B23E38 /* ActivityIndicator.swift in Sources */,
 				9497F27B282872F30027B745 /* HistoryCardView.swift in Sources */,
 				951C64452828665A001234F8 /* DailyHomeView.swift in Sources */,
 				95DBF852281488CE00662815 /* ContentView.swift in Sources */,
