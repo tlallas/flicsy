@@ -16,8 +16,17 @@ struct LoadingScreen: View {
     
     var body: some View {
         VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            ActivityIndicator(isAnimating: true)
+            Text("flicsy")
+                .font(.system(size: 80))
+                .fontWeight(.bold)
+                .padding(.bottom)
+                .foregroundColor(Color("PrimaryColor"))
+            
+            Text("relive, reflect, remember")
+                .foregroundColor(Color("PrimaryColor"))
+                .padding(.bottom)
+            
+//            ActivityIndicator(isAnimating: true)
         }.onReceive(timer) { _ in
             if loadingTimeRemaining > 1 {
                 loadingTimeRemaining -= 1

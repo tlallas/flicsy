@@ -14,7 +14,6 @@
 		951C6447282A0072001234F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C6446282A0072001234F8 /* SceneDelegate.swift */; };
 		9533BD18283C27E800EC6896 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9533BD17283C27E700EC6896 /* LoadingScreen.swift */; };
 		9563AC5F2836471E00B23E38 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563AC5E2836471E00B23E38 /* ActivityIndicator.swift */; };
-		9563AC6128383B0800B23E38 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9563AC6028383B0800B23E38 /* Launch Screen.storyboard */; };
 		956C300F28361DCC00100BE7 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956C300E28361DCC00100BE7 /* HistoryViewModel.swift */; };
 		9573C408282E0D9800779277 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9573C407282E0D9800779277 /* GoogleService-Info.plist */; };
 		9584086A283087F200CAF926 /* SkipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95840869283087F200CAF926 /* SkipView.swift */; };
@@ -70,7 +69,6 @@
 		951F132F28149343004F46BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9533BD17283C27E700EC6896 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		9563AC5E2836471E00B23E38 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
-		9563AC6028383B0800B23E38 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		956C300E28361DCC00100BE7 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		9573C407282E0D9800779277 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		95840869283087F200CAF926 /* SkipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipView.swift; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 		95DBF843281488CE00662815 = {
 			isa = PBXGroup;
 			children = (
-				9563AC6028383B0800B23E38 /* Launch Screen.storyboard */,
 				95DBF84E281488CE00662815 /* flicsy */,
 				95DBF85F281488D000662815 /* flicsyTests */,
 				95DBF869281488D000662815 /* flicsyUITests */,
@@ -342,7 +339,6 @@
 			files = (
 				95DBF857281488D000662815 /* Preview Assets.xcassets in Resources */,
 				9573C408282E0D9800779277 /* GoogleService-Info.plist in Resources */,
-				9563AC6128383B0800B23E38 /* Launch Screen.storyboard in Resources */,
 				95DBF854281488D000662815 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -661,7 +657,6 @@
 				INFOPLIST_KEY_NSRemindersUsageDescription = "Flicsy would like to send you reminders to practice reflection.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -697,7 +692,6 @@
 				INFOPLIST_KEY_NSRemindersUsageDescription = "Flicsy would like to send you reminders to practice reflection.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
