@@ -15,14 +15,18 @@ import CoreData
 struct HistoryView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @StateObject var historyVM = HistoryViewModel()
+    var fromBackButton : Bool
+    @Binding var fromSubmit : Bool
     @State var isLoading: Bool = true
     @State var timeRemaining = 3
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    init (fromBackButton: Bool) {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.init(Color("PrimaryColor"))]
-    }
+//    init (fromBackButton: Bool, fromSubmit: Bool) {
+//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.init(Color("PrimaryColor"))]
+//        self.fromSubmit = fromSubmit
+//        self.fromBackButton = fromBackButton
+//    }
     
     static let taskDateFormat: DateFormatter = {
         let formatter = DateFormatter()
@@ -42,20 +46,26 @@ struct HistoryView: View {
                         .padding([.leading, .trailing])
                         .padding(.bottom, 100)
                 }
-                if isLoading && timeRemaining > 0{
+                if fromSubmit && isLoading && timeRemaining > 0{
                     VStack {
                         Text("Loading your reflection history...")
                             .font(.headline)
                             .foregroundColor(Color("PrimaryColor"))
                         ActivityIndicator(isAnimating: isLoading)
                     }.onReceive(timer) { _ in
-                        if timeRemaining > 0 {
+                        if timeRemaining > 1 {
                             timeRemaining -= 1
                         } else {
                             isLoading = false
                             timeRemaining = 3
+                            fromSubmit = false 
                         }
-                    }.onAppear(perform: {historyVM.fetchReflections()})
+                    
+                    }.onAppear(perform: {
+                        if timeRemaining >= 3 {
+                            historyVM.fetchReflections()
+                        }
+                    })
                 } else {
                     List {
                         ForEach(historyVM.reflections, id: \.self) { i in
@@ -94,7 +104,9 @@ struct HistoryView: View {
                                                          Text(emotion)
                                                              .font(.system(size: 13))
                                                              .foregroundColor(Color("PrimaryColor"))
-                                                     }
+                                                     }.padding([.leading, .trailing])
+                                                    .background(Color("BabyBlueColor"))
+                                                    .cornerRadius(12)
                                                  }
                                              }
                                          }
@@ -104,7 +116,9 @@ struct HistoryView: View {
                         }
                     }
                 }
+            
             }.navigationTitle("History")
+                
         }.onAppear(perform: {
             if (timeRemaining != -1) {
                 timeRemaining = 3

@@ -12,6 +12,7 @@ import Firebase
 
 struct DailyHomeView: View {
     @Binding var tabSelection: Int
+    @Binding var fromSubmit: Bool
     @State var flipped:Bool = false
     @State var flip:Bool = false
     @State var onDailyFlicCard:Bool = false
@@ -84,7 +85,7 @@ struct DailyHomeView: View {
                                            dailyImage: $dailyImage, tabSelection: $tabSelection,
                                            photoLocality: $photoLocality,
                                            photoAdministrativeArea: $photoAdministrativeArea,
-                                           photoCountry: $photoCountry, revealController: revealController).opacity(flipped ? 0 : 1)
+                                               photoCountry: $photoCountry, revealController: revealController, fromSubmit: $fromSubmit).opacity(flipped ? 0 : 1)
                             
                                 DailyFlicCard(photoDateData: $photoDateData,
                                           photoLocationData: $photoLocationData,
@@ -379,6 +380,7 @@ struct ReflectionCard:View {
     @Binding var photoAdministrativeArea : String //state or region
     @Binding var photoCountry : String
     var revealController : FetchedResults<RevealController>
+    @Binding var fromSubmit : Bool
     @State private var reflectionText: String = "Write reflection..."
     @State private var title: String = ""
     @State var selectedEmotion = 0
@@ -489,6 +491,7 @@ struct ReflectionCard:View {
 //        reflection.thumbnail = thumbnailData
 //
 //        PersistenceController.shared.save()
+        fromSubmit = true
         self.tabSelection = 1
     }
 }
@@ -525,6 +528,7 @@ struct CountDownCard:View {
                     .font(.title)
                 Text("\(timeString(time: timeRemaining))")
                             .font(.system(size: 60))
+                            .fontWeight(.bold)
                             .frame(height: 80.0)
                             .frame(minWidth: 0, maxWidth: .infinity)
                             .foregroundColor(Color("PrimaryColor"))

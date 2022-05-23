@@ -15,9 +15,11 @@ import FirebaseAnalytics
 @main
 struct flicsyApp: App {
     let persistentController = PersistenceController.shared
+    let loadController = LoadController.shared
     let hvm = HistoryViewModel()
     @Environment(\.scenePhase) var scenePhase
-//    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate NOT IN USE
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+ 
     
     init () {
         FirebaseApp.configure()
@@ -36,18 +38,26 @@ struct flicsyApp: App {
                 print("Scene is in background")
                 persistentController.save()
                 hvm.fetchReflections()
+                loadController.startLoading()
             case .inactive:
                 print("Scene is inactive")
-                hvm.fetchReflections()
+                loadController.startLoading()
             case .active:
                 print("Scene is active")
-                hvm.fetchReflections()
             @unknown default:
                 print("Scene is default")
             }
         }
     }
 
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        let hvm = HistoryViewModel()
+        hvm.fetchReflections()
+        return true
+    }
 }
 
 

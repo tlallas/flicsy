@@ -12,7 +12,9 @@
 		951C644328282FDE001234F8 /* EmotionButtonField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C644228282FDE001234F8 /* EmotionButtonField.swift */; };
 		951C64452828665A001234F8 /* DailyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C64442828665A001234F8 /* DailyHomeView.swift */; };
 		951C6447282A0072001234F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C6446282A0072001234F8 /* SceneDelegate.swift */; };
+		9533BD18283C27E800EC6896 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9533BD17283C27E700EC6896 /* LoadingScreen.swift */; };
 		9563AC5F2836471E00B23E38 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563AC5E2836471E00B23E38 /* ActivityIndicator.swift */; };
+		9563AC6128383B0800B23E38 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9563AC6028383B0800B23E38 /* Launch Screen.storyboard */; };
 		956C300F28361DCC00100BE7 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956C300E28361DCC00100BE7 /* HistoryViewModel.swift */; };
 		9573C408282E0D9800779277 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9573C407282E0D9800779277 /* GoogleService-Info.plist */; };
 		9584086A283087F200CAF926 /* SkipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95840869283087F200CAF926 /* SkipView.swift */; };
@@ -34,7 +36,6 @@
 		D252DE9D28287A8B005A6964 /* Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252DE9928287A8A005A6964 /* Subview.swift */; };
 		D252DE9F28287A8B005A6964 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252DE9B28287A8A005A6964 /* OnboardingView.swift */; };
 		D252DEA628287A97005A6964 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252DEA328287A97005A6964 /* PageControl.swift */; };
-		D252DEAD28287AE3005A6964 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D252DEAC28287AE3005A6964 /* LaunchScreen.storyboard */; };
 		D277744E281DBFF500C96005 /* ReflectionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277744D281DBFF500C96005 /* ReflectionHistoryView.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +68,9 @@
 		951C64442828665A001234F8 /* DailyHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHomeView.swift; sourceTree = "<group>"; };
 		951C6446282A0072001234F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ../SceneDelegate.swift; sourceTree = "<group>"; };
 		951F132F28149343004F46BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9533BD17283C27E700EC6896 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		9563AC5E2836471E00B23E38 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		9563AC6028383B0800B23E38 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		956C300E28361DCC00100BE7 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		9573C407282E0D9800779277 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		95840869283087F200CAF926 /* SkipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipView.swift; sourceTree = "<group>"; };
@@ -90,7 +93,6 @@
 		D252DE9928287A8A005A6964 /* Subview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subview.swift; sourceTree = "<group>"; };
 		D252DE9B28287A8A005A6964 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D252DEA328287A97005A6964 /* PageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
-		D252DEAC28287AE3005A6964 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D277744D281DBFF500C96005 /* ReflectionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionHistoryView.swift; sourceTree = "<group>"; };
 		DAEB881237BAB3B94ECB6E98 /* Pods-flicsy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flicsy.debug.xcconfig"; path = "Target Support Files/Pods-flicsy/Pods-flicsy.debug.xcconfig"; sourceTree = "<group>"; };
 		E261FBAACF89223176A64180 /* Pods-flicsy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flicsy.release.xcconfig"; path = "Target Support Files/Pods-flicsy/Pods-flicsy.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 		95DBF843281488CE00662815 = {
 			isa = PBXGroup;
 			children = (
+				9563AC6028383B0800B23E38 /* Launch Screen.storyboard */,
 				95DBF84E281488CE00662815 /* flicsy */,
 				95DBF85F281488D000662815 /* flicsyTests */,
 				95DBF869281488D000662815 /* flicsyUITests */,
@@ -179,6 +182,7 @@
 				9481CBA2283613EA006DEBF2 /* NoPhotoAccessView.swift */,
 				9599A74E283592F10057A6D3 /* NotificationsController.swift */,
 				951C6446282A0072001234F8 /* SceneDelegate.swift */,
+				9533BD17283C27E700EC6896 /* LoadingScreen.swift */,
 				D252DEA328287A97005A6964 /* PageControl.swift */,
 				D252DE9928287A8A005A6964 /* Subview.swift */,
 				95DBF84F281488CE00662815 /* flicsyApp.swift */,
@@ -196,7 +200,6 @@
 				95DBF853281488D000662815 /* Assets.xcassets */,
 				95DBF855281488D000662815 /* Preview Content */,
 				D277744D281DBFF500C96005 /* ReflectionHistoryView.swift */,
-				D252DEAC28287AE3005A6964 /* LaunchScreen.storyboard */,
 			);
 			path = flicsy;
 			sourceTree = "<group>";
@@ -339,7 +342,7 @@
 			files = (
 				95DBF857281488D000662815 /* Preview Assets.xcassets in Resources */,
 				9573C408282E0D9800779277 /* GoogleService-Info.plist in Resources */,
-				D252DEAD28287AE3005A6964 /* LaunchScreen.storyboard in Resources */,
+				9563AC6128383B0800B23E38 /* Launch Screen.storyboard in Resources */,
 				95DBF854281488D000662815 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,6 +479,7 @@
 				95DBF852281488CE00662815 /* ContentView.swift in Sources */,
 				9481CBA3283613EA006DEBF2 /* NoPhotoAccessView.swift in Sources */,
 				D252DE9D28287A8B005A6964 /* Subview.swift in Sources */,
+				9533BD18283C27E800EC6896 /* LoadingScreen.swift in Sources */,
 				951C6447282A0072001234F8 /* SceneDelegate.swift in Sources */,
 				9599A74F283592F10057A6D3 /* NotificationsController.swift in Sources */,
 				95DBF852281488CE00662815 /* ContentView.swift in Sources */,
@@ -657,7 +661,7 @@
 				INFOPLIST_KEY_NSRemindersUsageDescription = "Flicsy would like to send you reminders to practice reflection.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -693,7 +697,7 @@
 				INFOPLIST_KEY_NSRemindersUsageDescription = "Flicsy would like to send you reminders to practice reflection.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
